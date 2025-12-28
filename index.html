@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>المكتبة الهندسية - ملفات دراسية PDF</title>
+    <title>لوحة التحكم - المكتبة الهندسية</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap">
     <style>
@@ -17,11 +17,11 @@
             --text-secondary: #94a3b8;
             --border-color: #334155;
             --accent-color: #3b82f6;
-            --mech-color: #ef4444;
-            --civil-color: #10b981;
-            --elec-color: #f59e0b;
-            --comp-color: #8b5cf6;
+            --danger-color: #ef4444;
+            --warning-color: #f59e0b;
+            --success-color: #10b981;
             --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+            --sidebar-width: 260px;
         }
 
         * {
@@ -35,549 +35,182 @@
             background-color: var(--dark-bg);
             color: var(--text-color);
             line-height: 1.6;
-            padding-top: 80px;
+            display: flex;
             min-height: 100vh;
         }
 
-        .container {
-            width: 100%;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Header Styles */
-        header {
-            background-color: rgba(15, 23, 42, 0.95);
-            backdrop-filter: blur(10px);
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            padding: 15px 0;
-            box-shadow: var(--shadow);
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .header-content {
+        /* Sidebar Styles */
+        .sidebar {
+            width: var(--sidebar-width);
+            background-color: #0a0f1f;
+            padding: 20px 0;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            flex-direction: column;
+            border-left: 1px solid var(--border-color);
+            position: fixed;
+            height: 100vh;
+            right: 0;
+            top: 0;
+            z-index: 100;
         }
 
         .logo {
-            display: flex;
-            align-items: center;
+            padding: 0 20px 30px;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 20px;
         }
 
-        .logo-icon {
-            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
-            width: 50px;
-            height: 50px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-left: 15px;
-        }
-
-        .logo-icon i {
-            font-size: 1.8rem;
-        }
-
-        .logo-text {
-            font-size: 1.8rem;
-            font-weight: 700;
+        .logo h1 {
+            font-size: 1.5rem;
             background: linear-gradient(to right, var(--primary-color), var(--accent-color));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
+            display: flex;
+            align-items: center;
         }
 
-        .logo-subtext {
+        .logo h1 i {
+            margin-left: 10px;
+            font-size: 1.8rem;
+        }
+
+        .logo p {
             font-size: 0.9rem;
             color: var(--text-secondary);
-            margin-top: -5px;
+            margin-top: 5px;
         }
 
-        .nav-links {
-            display: flex;
-            list-style: none;
-        }
-
-        .nav-links li {
-            margin-right: 25px;
-        }
-
-        .nav-links a {
-            color: var(--text-color);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: color 0.3s;
+        .admin-info {
             display: flex;
             align-items: center;
+            padding: 15px 20px;
+            background-color: rgba(59, 130, 246, 0.1);
+            margin: 0 15px 25px;
+            border-radius: 10px;
+            border: 1px solid rgba(59, 130, 246, 0.2);
         }
 
-        .nav-links a i {
-            margin-left: 8px;
-            font-size: 1.2rem;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary-color);
-        }
-
-        .user-actions {
-            display: flex;
-            align-items: center;
-        }
-
-        .search-box {
-            position: relative;
-            margin-left: 20px;
-        }
-
-        .search-box input {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 30px;
-            padding: 10px 45px 10px 20px;
-            color: var(--text-color);
-            width: 250px;
-            font-size: 1rem;
-            transition: all 0.3s;
-        }
-
-        .search-box input:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            width: 300px;
-        }
-
-        .search-box i {
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-secondary);
-        }
-
-        .user-profile {
-            margin-right: 15px;
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-        }
-
-        .user-avatar {
-            width: 40px;
-            height: 40px;
+        .admin-avatar {
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
             background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-left: 10px;
+            margin-left: 15px;
             font-weight: bold;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
         }
 
-        /* Hero Section */
-        .hero {
-            padding: 60px 0 40px;
-            background: linear-gradient(to bottom, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
-            margin-bottom: 40px;
-            border-radius: 0 0 20px 20px;
+        .admin-details h3 {
+            font-size: 1.1rem;
+            margin-bottom: 3px;
         }
 
-        .hero-content {
+        .admin-details p {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .nav-links {
+            list-style: none;
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 0 10px;
+        }
+
+        .nav-links li {
+            margin-bottom: 5px;
+        }
+
+        .nav-links a {
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
+            padding: 12px 15px;
+            color: var(--text-color);
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s;
         }
 
-        .hero-text {
-            flex: 1;
-            min-width: 300px;
-        }
-
-        .hero-image {
-            flex: 1;
-            min-width: 300px;
-            text-align: center;
-        }
-
-        .hero-image img {
-            max-width: 100%;
-            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            line-height: 1.2;
-        }
-
-        .hero h1 span {
-            background: linear-gradient(to right, var(--primary-color), var(--accent-color));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .hero p {
+        .nav-links a i {
+            margin-left: 10px;
             font-size: 1.2rem;
-            color: var(--text-secondary);
-            margin-bottom: 30px;
-            max-width: 600px;
-        }
-
-        .stats {
-            display: flex;
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .stat-item {
+            width: 24px;
             text-align: center;
         }
 
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: 700;
+        .nav-links a:hover {
+            background-color: rgba(255, 255, 255, 0.05);
             color: var(--primary-color);
-            display: block;
         }
 
-        .stat-label {
-            font-size: 1rem;
-            color: var(--text-secondary);
+        .nav-links a.active {
+            background: linear-gradient(to right, rgba(59, 130, 246, 0.2), rgba(52, 152, 219, 0.2));
+            color: var(--accent-color);
+            border-right: 3px solid var(--accent-color);
         }
 
-        /* Specialties Section */
-        .specialties {
-            margin-bottom: 60px;
+        .logout {
+            padding: 20px;
+            border-top: 1px solid var(--border-color);
+            margin-top: auto;
         }
 
-        .section-title {
-            font-size: 2.5rem;
-            margin-bottom: 40px;
-            text-align: center;
-            position: relative;
-            padding-bottom: 15px;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            width: 100px;
-            height: 4px;
-            background: linear-gradient(to right, var(--primary-color), var(--accent-color));
-            bottom: 0;
-            right: 50%;
-            transform: translateX(50%);
-            border-radius: 2px;
-        }
-
-        .specialties-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 30px;
-            margin-bottom: 50px;
-        }
-
-        .specialty-card {
-            background-color: var(--card-bg);
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: transform 0.3s, box-shadow 0.3s;
-            border: 1px solid var(--border-color);
-            cursor: pointer;
-        }
-
-        .specialty-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
-        }
-
-        .specialty-header {
-            padding: 25px;
-            display: flex;
-            align-items: center;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .specialty-icon {
-            width: 70px;
-            height: 70px;
-            border-radius: 15px;
+        .logout a {
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-left: 20px;
-            font-size: 2rem;
-        }
-
-        .mechanical .specialty-icon {
-            background-color: rgba(239, 68, 68, 0.2);
-            color: var(--mech-color);
-        }
-
-        .civil .specialty-icon {
-            background-color: rgba(16, 185, 129, 0.2);
-            color: var(--civil-color);
-        }
-
-        .electrical .specialty-icon {
-            background-color: rgba(245, 158, 11, 0.2);
-            color: var(--elec-color);
-        }
-
-        .computer .specialty-icon {
-            background-color: rgba(139, 92, 246, 0.2);
-            color: var(--comp-color);
-        }
-
-        .specialty-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-        }
-
-        .specialty-description {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-
-        .specialty-info {
-            padding: 20px 25px;
-        }
-
-        .specialty-stats {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px;
-        }
-
-        .file-count, .semester-count {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .count-number {
-            font-size: 1.8rem;
-            font-weight: 700;
-        }
-
-        .mechanical .count-number {
-            color: var(--mech-color);
-        }
-
-        .civil .count-number {
-            color: var(--civil-color);
-        }
-
-        .electrical .count-number {
-            color: var(--elec-color);
-        }
-
-        .computer .count-number {
-            color: var(--comp-color);
-        }
-
-        .count-label {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-        }
-
-        .specialty-button {
-            display: block;
-            text-align: center;
+            background-color: rgba(239, 68, 68, 0.1);
+            color: var(--danger-color);
             padding: 12px;
-            border-radius: 10px;
-            background-color: rgba(59, 130, 246, 0.1);
-            color: var(--accent-color);
+            border-radius: 8px;
             text-decoration: none;
             font-weight: 600;
             transition: all 0.3s;
-            border: 1px solid rgba(59, 130, 246, 0.3);
+            border: 1px solid rgba(239, 68, 68, 0.2);
         }
 
-        .specialty-button:hover {
-            background-color: var(--accent-color);
+        .logout a:hover {
+            background-color: var(--danger-color);
             color: white;
         }
 
-        /* Files Section */
-        .files-section {
-            margin-bottom: 60px;
+        .logout a i {
+            margin-left: 8px;
         }
 
-        .filters {
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            margin-right: var(--sidebar-width);
+            padding: 30px;
+            width: calc(100% - var(--sidebar-width));
+        }
+
+        .page-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 30px;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .filter-tabs {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .filter-tab {
-            background-color: var(--card-bg);
-            color: var(--text-color);
-            border: 1px solid var(--border-color);
-            padding: 10px 20px;
-            border-radius: 30px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-
-        .filter-tab:hover, .filter-tab.active {
-            background: linear-gradient(to right, var(--primary-color), var(--accent-color));
-            border-color: transparent;
-        }
-
-        .view-options {
-            display: flex;
-            gap: 10px;
-        }
-
-        .view-btn {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            color: var(--text-color);
-            width: 40px;
-            height: 40px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .view-btn:hover, .view-btn.active {
-            background-color: var(--accent-color);
-            border-color: var(--accent-color);
-        }
-
-        .files-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 25px;
-            margin-bottom: 50px;
-        }
-
-        .file-card {
-            background-color: var(--card-bg);
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            border: 1px solid var(--border-color);
-            transition: transform 0.3s;
-        }
-
-        .file-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .file-header {
-            padding: 20px;
+            padding-bottom: 20px;
             border-bottom: 1px solid var(--border-color);
-            display: flex;
-            align-items: center;
         }
 
-        .file-icon {
-            width: 50px;
-            height: 50px;
-            background-color: rgba(239, 68, 68, 0.1);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-left: 15px;
-            color: var(--mech-color);
+        .page-title h2 {
+            font-size: 2rem;
+            margin-bottom: 8px;
         }
 
-        .file-icon.pdf {
-            background-color: rgba(239, 68, 68, 0.1);
-            color: var(--mech-color);
-        }
-
-        .file-icon.ppt {
-            background-color: rgba(245, 158, 11, 0.1);
-            color: var(--elec-color);
-        }
-
-        .file-icon.doc {
-            background-color: rgba(59, 130, 246, 0.1);
-            color: var(--accent-color);
-        }
-
-        .file-icon.zip {
-            background-color: rgba(16, 185, 129, 0.1);
-            color: var(--civil-color);
-        }
-
-        .file-info {
-            flex: 1;
-        }
-
-        .file-title {
-            font-size: 1.2rem;
-            font-weight: 700;
-            margin-bottom: 5px;
-        }
-
-        .file-meta {
-            display: flex;
+        .page-title p {
             color: var(--text-secondary);
-            font-size: 0.9rem;
+        }
+
+        .page-actions {
+            display: flex;
             gap: 15px;
-        }
-
-        .file-body {
-            padding: 20px;
-        }
-
-        .file-description {
-            color: var(--text-secondary);
-            margin-bottom: 20px;
-            line-height: 1.5;
-        }
-
-        .file-details {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px;
-            font-size: 0.9rem;
-        }
-
-        .file-detail {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .detail-label {
-            color: var(--text-secondary);
-            margin-bottom: 5px;
-        }
-
-        .file-actions {
-            display: flex;
-            gap: 10px;
         }
 
         .btn {
@@ -593,183 +226,441 @@
             gap: 8px;
         }
 
-        .btn-download {
+        .btn-primary {
             background: linear-gradient(to right, var(--primary-color), var(--accent-color));
             color: white;
-            flex: 1;
         }
 
-        .btn-download:hover {
+        .btn-primary:hover {
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);
         }
 
-        .btn-preview {
+        .btn-secondary {
             background-color: rgba(255, 255, 255, 0.05);
             color: var(--text-color);
             border: 1px solid var(--border-color);
         }
 
-        .btn-preview:hover {
+        .btn-secondary:hover {
             background-color: rgba(255, 255, 255, 0.1);
         }
 
-        /* Footer */
-        footer {
-            background-color: #0a0f1f;
-            padding: 60px 0 30px;
-            margin-top: 60px;
-            border-top: 1px solid var(--border-color);
+        .btn-success {
+            background-color: var(--success-color);
+            color: white;
         }
 
-        .footer-content {
+        .btn-success:hover {
+            background-color: #0da271;
+            transform: translateY(-2px);
+        }
+
+        .btn-danger {
+            background-color: var(--danger-color);
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background-color: #dc2626;
+        }
+
+        /* Stats Cards */
+        .stats-cards {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 20px;
             margin-bottom: 40px;
         }
 
-        .footer-column h3 {
-            font-size: 1.4rem;
-            margin-bottom: 20px;
-            position: relative;
-            padding-bottom: 10px;
-        }
-
-        .footer-column h3::after {
-            content: '';
-            position: absolute;
-            width: 50px;
-            height: 3px;
-            background: linear-gradient(to right, var(--primary-color), var(--accent-color));
-            bottom: 0;
-            right: 0;
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 12px;
-        }
-
-        .footer-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .footer-links a:hover {
-            color: var(--primary-color);
-            padding-right: 5px;
-        }
-
-        .social-icons {
+        .stat-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px;
             display: flex;
-            gap: 15px;
-            margin-top: 20px;
+            align-items: center;
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s;
         }
 
-        .social-icons a {
-            display: inline-flex;
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
             align-items: center;
             justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: var(--card-bg);
-            border-radius: 50%;
-            color: var(--text-color);
-            font-size: 1.2rem;
-            transition: all 0.3s;
+            margin-left: 15px;
+            font-size: 1.8rem;
         }
 
-        .social-icons a:hover {
-            background: linear-gradient(to right, var(--primary-color), var(--accent-color));
-            transform: translateY(-3px);
+        .stat-icon.files {
+            background-color: rgba(59, 130, 246, 0.2);
+            color: var(--accent-color);
         }
 
-        .copyright {
-            text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid var(--border-color);
+        .stat-icon.users {
+            background-color: rgba(16, 185, 129, 0.2);
+            color: var(--success-color);
+        }
+
+        .stat-icon.downloads {
+            background-color: rgba(245, 158, 11, 0.2);
+            color: var(--warning-color);
+        }
+
+        .stat-icon.storage {
+            background-color: rgba(139, 92, 246, 0.2);
+            color: #8b5cf6;
+        }
+
+        .stat-info h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .stat-info p {
             color: var(--text-secondary);
             font-size: 0.9rem;
         }
 
-        /* Responsive Design */
-        @media (max-width: 992px) {
-            .hero-content {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .hero-text {
-                margin-bottom: 40px;
-            }
-            
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .specialties-grid {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            }
-            
-            .files-grid {
-                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            }
+        /* Upload Form */
+        .upload-form-container {
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 40px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow);
         }
 
-        @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                gap: 15px;
-            }
-            
-            .nav-links {
-                margin-top: 15px;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            
-            .search-box input {
-                width: 200px;
-            }
-            
-            .search-box input:focus {
-                width: 250px;
-            }
-            
-            .hero h1 {
-                font-size: 2rem;
-            }
-            
-            .section-title {
-                font-size: 2rem;
-            }
-            
-            .filters {
-                flex-direction: column;
-                align-items: flex-start;
-            }
+        .upload-form-container h3 {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
         }
 
-        @media (max-width: 480px) {
-            .hero h1 {
-                font-size: 1.8rem;
-            }
-            
-            .specialties-grid, .files-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .search-box input {
-                width: 180px;
-            }
+        .upload-form-container h3 i {
+            margin-left: 10px;
+            color: var(--accent-color);
         }
 
-        /* Modal for file preview */
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            background-color: rgba(15, 23, 42, 0.5);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-color);
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-color);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .file-upload-area {
+            border: 2px dashed var(--border-color);
+            border-radius: 12px;
+            padding: 40px 20px;
+            text-align: center;
+            margin-bottom: 20px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .file-upload-area:hover {
+            border-color: var(--accent-color);
+            background-color: rgba(59, 130, 246, 0.05);
+        }
+
+        .file-upload-area i {
+            font-size: 3rem;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+        }
+
+        .file-upload-area p {
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+        }
+
+        .file-upload-area .file-types {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        #file-input {
+            display: none;
+        }
+
+        .selected-file {
+            background-color: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .file-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .file-icon {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(239, 68, 68, 0.1);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 15px;
+            color: var(--danger-color);
+        }
+
+        .file-details h4 {
+            font-size: 1rem;
+            margin-bottom: 3px;
+        }
+
+        .file-details p {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .remove-file {
+            background: none;
+            border: none;
+            color: var(--danger-color);
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        /* Files Table */
+        .files-table-container {
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            padding: 30px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow);
+        }
+
+        .files-table-container h3 {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+        }
+
+        .files-table-container h3 i {
+            margin-left: 10px;
+            color: var(--accent-color);
+        }
+
+        .table-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .table-search {
+            position: relative;
+        }
+
+        .table-search input {
+            padding: 10px 40px 10px 15px;
+            background-color: rgba(15, 23, 42, 0.5);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-color);
+            width: 250px;
+        }
+
+        .table-search i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-secondary);
+        }
+
+        .table-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background-color: rgba(15, 23, 42, 0.7);
+        }
+
+        th {
+            padding: 15px;
+            text-align: right;
+            font-weight: 600;
+            color: var(--text-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        tbody tr {
+            transition: background-color 0.3s;
+        }
+
+        tbody tr:hover {
+            background-color: rgba(255, 255, 255, 0.03);
+        }
+
+        .file-type-badge {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .badge-pdf {
+            background-color: rgba(239, 68, 68, 0.2);
+            color: var(--danger-color);
+        }
+
+        .badge-ppt {
+            background-color: rgba(245, 158, 11, 0.2);
+            color: var(--warning-color);
+        }
+
+        .badge-doc {
+            background-color: rgba(59, 130, 246, 0.2);
+            color: var(--accent-color);
+        }
+
+        .badge-zip {
+            background-color: rgba(16, 185, 129, 0.2);
+            color: var(--success-color);
+        }
+
+        .specialty-badge {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            background-color: rgba(139, 92, 246, 0.2);
+            color: #8b5cf6;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .action-btn {
+            width: 35px;
+            height: 35px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s;
+            font-size: 1rem;
+        }
+
+        .edit-btn {
+            background-color: rgba(59, 130, 246, 0.1);
+            color: var(--accent-color);
+        }
+
+        .edit-btn:hover {
+            background-color: var(--accent-color);
+            color: white;
+        }
+
+        .delete-btn {
+            background-color: rgba(239, 68, 68, 0.1);
+            color: var(--danger-color);
+        }
+
+        .delete-btn:hover {
+            background-color: var(--danger-color);
+            color: white;
+        }
+
+        .preview-btn {
+            background-color: rgba(16, 185, 129, 0.1);
+            color: var(--success-color);
+        }
+
+        .preview-btn:hover {
+            background-color: var(--success-color);
+            color: white;
+        }
+
+        /* Modal */
         .modal {
             display: none;
             position: fixed;
@@ -789,7 +680,7 @@
             padding: 30px;
             border-radius: 15px;
             width: 90%;
-            max-width: 800px;
+            max-width: 600px;
             max-height: 90vh;
             overflow-y: auto;
             border: 1px solid var(--border-color);
@@ -832,433 +723,378 @@
             justify-content: flex-end;
             gap: 10px;
         }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+            gap: 10px;
+        }
+
+        .pagination-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(255, 255, 255, 0.05);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .pagination-btn.active {
+            background-color: var(--accent-color);
+            color: white;
+            border-color: var(--accent-color);
+        }
+
+        .pagination-btn:hover:not(.active) {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .sidebar {
+                width: 80px;
+            }
+            
+            .logo h1 span, 
+            .admin-details,
+            .nav-links a span,
+            .logout a span {
+                display: none;
+            }
+            
+            .logo h1 {
+                justify-content: center;
+            }
+            
+            .admin-info {
+                justify-content: center;
+                padding: 10px;
+            }
+            
+            .nav-links a {
+                justify-content: center;
+                padding: 15px 0;
+            }
+            
+            .nav-links a i {
+                margin-left: 0;
+            }
+            
+            .main-content {
+                margin-right: 80px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                padding: 20px 15px;
+            }
+            
+            .page-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            
+            .page-actions {
+                width: 100%;
+                justify-content: flex-start;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .table-controls {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .table-search input {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .sidebar {
+                width: 70px;
+            }
+            
+            .main-content {
+                margin-right: 70px;
+            }
+            
+            .stats-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-actions {
+                flex-direction: column;
+            }
+            
+            .action-buttons {
+                flex-wrap: wrap;
+            }
+        }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="container header-content">
-            <div class="logo">
-                <div class="logo-icon">
-                    <i class="fas fa-graduation-cap"></i>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="logo">
+            <h1><i class="fas fa-graduation-cap"></i> <span>المكتبة الهندسية</span></h1>
+            <p>لوحة التحكم الإدارية</p>
+        </div>
+        
+        <div class="admin-info">
+            <div class="admin-avatar">م</div>
+            <div class="admin-details">
+                <h3>محمد أحمد</h3>
+                <p>مدير النظام</p>
+            </div>
+        </div>
+        
+        <ul class="nav-links">
+            <li><a href="#" class="active"><i class="fas fa-tachometer-alt"></i> <span>لوحة التحكم</span></a></li>
+            <li><a href="#"><i class="fas fa-cloud-upload-alt"></i> <span>رفع الملفات</span></a></li>
+            <li><a href="#"><i class="fas fa-file-alt"></i> <span>إدارة الملفات</span></a></li>
+            <li><a href="#"><i class="fas fa-users"></i> <span>المستخدمين</span></a></li>
+            <li><a href="#"><i class="fas fa-chart-bar"></i> <span>الإحصائيات</span></a></li>
+            <li><a href="#"><i class="fas fa-cog"></i> <span>الإعدادات</span></a></li>
+        </ul>
+        
+        <div class="logout">
+            <a href="#"><i class="fas fa-sign-out-alt"></i> <span>تسجيل الخروج</span></a>
+        </div>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Page Header -->
+        <div class="page-header">
+            <div class="page-title">
+                <h2>لوحة التحكم الإدارية</h2>
+                <p>إدارة ورفع الملفات الدراسية لكلية الهندسة</p>
+            </div>
+            
+            <div class="page-actions">
+                <button class="btn btn-secondary">
+                    <i class="fas fa-sync-alt"></i> تحديث
+                </button>
+                <button class="btn btn-primary" id="quick-upload-btn">
+                    <i class="fas fa-upload"></i> رفع سريع
+                </button>
+            </div>
+        </div>
+        
+        <!-- Stats Cards -->
+        <div class="stats-cards">
+            <div class="stat-card">
+                <div class="stat-icon files">
+                    <i class="fas fa-file-pdf"></i>
                 </div>
-                <div>
-                    <div class="logo-text">المكتبة الهندسية</div>
-                    <div class="logo-subtext">كلية الهندسة - جامعة التقنية</div>
+                <div class="stat-info">
+                    <h3>1,254</h3>
+                    <p>إجمالي الملفات</p>
                 </div>
             </div>
             
-            <ul class="nav-links">
-                <li><a href="#"><i class="fas fa-home"></i> الرئيسية</a></li>
-                <li><a href="#specialties"><i class="fas fa-layer-group"></i> التخصصات</a></li>
-                <li><a href="#files"><i class="fas fa-file-pdf"></i> الملفات</a></li>
-                <li><a href="#"><i class="fas fa-question-circle"></i> المساعدة</a></li>
-            </ul>
+            <div class="stat-card">
+                <div class="stat-icon users">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="stat-info">
+                    <h3>2,850</h3>
+                    <p>المستخدمين المسجلين</p>
+                </div>
+            </div>
             
-            <div class="user-actions">
-                <div class="search-box">
-                    <input type="text" placeholder="ابحث عن ملفات دراسية...">
+            <div class="stat-card">
+                <div class="stat-icon downloads">
+                    <i class="fas fa-download"></i>
+                </div>
+                <div class="stat-info">
+                    <h3>15,234</h3>
+                    <p>إجمالي التحميلات</p>
+                </div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon storage">
+                    <i class="fas fa-hdd"></i>
+                </div>
+                <div class="stat-info">
+                    <h3>4.2 GB</h3>
+                    <p>سعة التخزين المستخدمة</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Upload Form -->
+        <div class="upload-form-container">
+            <h3><i class="fas fa-cloud-upload-alt"></i> رفع ملف دراسي جديد</h3>
+            
+            <form id="upload-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="file-name">اسم الملف</label>
+                        <input type="text" id="file-name" placeholder="أدخل اسم الملف بالكامل" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="file-specialty">التخصص</label>
+                        <select id="file-specialty" required>
+                            <option value="">اختر التخصص</option>
+                            <option value="mechanical">الهندسة الميكانيكية</option>
+                            <option value="civil">الهندسة المدنية</option>
+                            <option value="electrical">الهندسة الكهربائية</option>
+                            <option value="computer">هندسة الحاسوب</option>
+                            <option value="chemical">الهندسة الكيميائية</option>
+                            <option value="industrial">الهندسة الصناعية</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="file-course">المادة الدراسية</label>
+                        <input type="text" id="file-course" placeholder="أدخل اسم المادة" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="file-semester">الفصل الدراسي</label>
+                        <select id="file-semester" required>
+                            <option value="">اختر الفصل</option>
+                            <option value="1">الفصل الأول</option>
+                            <option value="2">الفصل الثاني</option>
+                            <option value="3">الفصل الثالث</option>
+                            <option value="4">الفصل الرابع</option>
+                            <option value="5">الفصل الخامس</option>
+                            <option value="6">الفصل السادس</option>
+                            <option value="7">الفصل السابع</option>
+                            <option value="8">الفصل الثامن</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="file-type">نوع الملف</label>
+                        <select id="file-type" required>
+                            <option value="pdf">PDF</option>
+                            <option value="ppt">عرض تقديمي (PPT)</option>
+                            <option value="doc">وثيقة (DOC)</option>
+                            <option value="zip">أرشيف (ZIP)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="file-lecturer">المحاضر</label>
+                        <input type="text" id="file-lecturer" placeholder="اسم المحاضر" required>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="file-description">وصف الملف</label>
+                        <textarea id="file-description" placeholder="أدخل وصفاً مفصلاً للملف" rows="3"></textarea>
+                    </div>
+                </div>
+                
+                <!-- File Upload Area -->
+                <div class="file-upload-area" id="file-upload-area">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <p>اسحب وأفلت الملف هنا أو انقر للاختيار</p>
+                    <p class="file-types">يدعم الملفات: PDF, PPT, DOC, ZIP (الحد الأقصى 50MB)</p>
+                    <input type="file" id="file-input" accept=".pdf,.ppt,.pptx,.doc,.docx,.zip,.rar">
+                </div>
+                
+                <!-- Selected File Display -->
+                <div id="selected-file-container" style="display: none;">
+                    <div class="selected-file">
+                        <div class="file-info">
+                            <div class="file-icon">
+                                <i class="fas fa-file-pdf"></i>
+                            </div>
+                            <div class="file-details">
+                                <h4 id="selected-file-name">اسم الملف</h4>
+                                <p id="selected-file-size">0 KB</p>
+                            </div>
+                        </div>
+                        <button type="button" class="remove-file" id="remove-file-btn">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="reset" class="btn btn-secondary">إلغاء</button>
+                    <button type="submit" class="btn btn-success">
+                        <i class="fas fa-check"></i> رفع الملف
+                    </button>
+                </div>
+            </form>
+        </div>
+        
+        <!-- Files Management Table -->
+        <div class="files-table-container">
+            <h3><i class="fas fa-file-alt"></i> إدارة الملفات الحالية</h3>
+            
+            <div class="table-controls">
+                <div class="table-search">
+                    <input type="text" placeholder="ابحث عن ملف...">
                     <i class="fas fa-search"></i>
                 </div>
-                <div class="user-profile">
-                    <div class="user-avatar">ط</div>
-                    <span>طالب هندسة</span>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container hero-content">
-            <div class="hero-text">
-                <h1>مرحباً في <span>المكتبة الهندسية</span></h1>
-                <p>منصة متكاملة لتحميل الملفات الدراسية لكلية الهندسة. تجد هنا محاضرات، كتب، ملخصات وأبحاث في جميع التخصصات الهندسية.</p>
                 
-                <div class="stats">
-                    <div class="stat-item">
-                        <span class="stat-number">1,250+</span>
-                        <span class="stat-label">ملف دراسي</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number">8</span>
-                        <span class="stat-label">تخصصات هندسية</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number">5,800+</span>
-                        <span class="stat-label">تحميل هذا الشهر</span>
-                    </div>
-                </div>
-            </div>
-            <div class="hero-image">
-                <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="مكتبة هندسية">
-            </div>
-        </div>
-    </section>
-
-    <!-- Specialties Section -->
-    <section class="specialties" id="specialties">
-        <div class="container">
-            <h2 class="section-title">التخصصات الهندسية</h2>
-            
-            <div class="specialties-grid">
-                <!-- Mechanical Engineering -->
-                <div class="specialty-card mechanical">
-                    <div class="specialty-header">
-                        <div class="specialty-icon">
-                            <i class="fas fa-cogs"></i>
-                        </div>
-                        <div>
-                            <h3 class="specialty-title">الهندسة الميكانيكية</h3>
-                            <p class="specialty-description">تصميم وتصنيع الآلات والأنظمة الميكانيكية</p>
-                        </div>
-                    </div>
-                    <div class="specialty-info">
-                        <div class="specialty-stats">
-                            <div class="file-count">
-                                <span class="count-number">320</span>
-                                <span class="count-label">ملف دراسي</span>
-                            </div>
-                            <div class="semester-count">
-                                <span class="count-number">8</span>
-                                <span class="count-label">فصول دراسية</span>
-                            </div>
-                        </div>
-                        <a href="#" class="specialty-button">عرض الملفات <i class="fas fa-arrow-left"></i></a>
-                    </div>
-                </div>
-
-                <!-- Civil Engineering -->
-                <div class="specialty-card civil">
-                    <div class="specialty-header">
-                        <div class="specialty-icon">
-                            <i class="fas fa-hard-hat"></i>
-                        </div>
-                        <div>
-                            <h3 class="specialty-title">الهندسة المدنية</h3>
-                            <p class="specialty-description">تصميم وتنفيذ المشاريع الإنشائية والبنية التحتية</p>
-                        </div>
-                    </div>
-                    <div class="specialty-info">
-                        <div class="specialty-stats">
-                            <div class="file-count">
-                                <span class="count-number">285</span>
-                                <span class="count-label">ملف دراسي</span>
-                            </div>
-                            <div class="semester-count">
-                                <span class="count-number">8</span>
-                                <span class="count-label">فصول دراسية</span>
-                            </div>
-                        </div>
-                        <a href="#" class="specialty-button">عرض الملفات <i class="fas fa-arrow-left"></i></a>
-                    </div>
-                </div>
-
-                <!-- Electrical Engineering -->
-                <div class="specialty-card electrical">
-                    <div class="specialty-header">
-                        <div class="specialty-icon">
-                            <i class="fas fa-bolt"></i>
-                        </div>
-                        <div>
-                            <h3 class="specialty-title">الهندسة الكهربائية</h3>
-                            <p class="specialty-description">دراسة وتطبيق الكهرباء والإلكترونيات والكهرومغناطيسية</p>
-                        </div>
-                    </div>
-                    <div class="specialty-info">
-                        <div class="specialty-stats">
-                            <div class="file-count">
-                                <span class="count-number">310</span>
-                                <span class="count-label">ملف دراسي</span>
-                            </div>
-                            <div class="semester-count">
-                                <span class="count-number">8</span>
-                                <span class="count-label">فصول دراسية</span>
-                            </div>
-                        </div>
-                        <a href="#" class="specialty-button">عرض الملفات <i class="fas fa-arrow-left"></i></a>
-                    </div>
-                </div>
-
-                <!-- Computer Engineering -->
-                <div class="specialty-card computer">
-                    <div class="specialty-header">
-                        <div class="specialty-icon">
-                            <i class="fas fa-laptop-code"></i>
-                        </div>
-                        <div>
-                            <h3 class="specialty-title">هندسة الحاسوب</h3>
-                            <p class="specialty-description">تصميم وبرمجة الأنظمة الحاسوبية والشبكات</p>
-                        </div>
-                    </div>
-                    <div class="specialty-info">
-                        <div class="specialty-stats">
-                            <div class="file-count">
-                                <span class="count-number">350</span>
-                                <span class="count-label">ملف دراسي</span>
-                            </div>
-                            <div class="semester-count">
-                                <span class="count-number">8</span>
-                                <span class="count-label">فصول دراسية</span>
-                            </div>
-                        </div>
-                        <a href="#" class="specialty-button">عرض الملفات <i class="fas fa-arrow-left"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Files Section -->
-    <section class="files-section" id="files">
-        <div class="container">
-            <h2 class="section-title">أحدث الملفات الدراسية</h2>
-            
-            <div class="filters">
-                <div class="filter-tabs">
-                    <button class="filter-tab active" data-filter="all">الكل</button>
-                    <button class="filter-tab" data-filter="mechanical">هندسة ميكانيكية</button>
-                    <button class="filter-tab" data-filter="civil">هندسة مدنية</button>
-                    <button class="filter-tab" data-filter="electrical">هندسة كهربائية</button>
-                    <button class="filter-tab" data-filter="computer">هندسة حاسوب</button>
-                </div>
-                
-                <div class="view-options">
-                    <button class="view-btn active" data-view="grid"><i class="fas fa-th-large"></i></button>
-                    <button class="view-btn" data-view="list"><i class="fas fa-list"></i></button>
+                <div class="table-actions">
+                    <button class="btn btn-secondary">
+                        <i class="fas fa-filter"></i> تصفية
+                    </button>
+                    <button class="btn btn-secondary" id="refresh-table">
+                        <i class="fas fa-sync-alt"></i>
+                    </button>
                 </div>
             </div>
             
-            <div class="files-grid">
-                <!-- File 1 -->
-                <div class="file-card" data-category="mechanical">
-                    <div class="file-header">
-                        <div class="file-icon pdf">
-                            <i class="fas fa-file-pdf"></i>
-                        </div>
-                        <div class="file-info">
-                            <h3 class="file-title">ميكانيكا المواد - المحاضرة 5</h3>
-                            <div class="file-meta">
-                                <span>الهندسة الميكانيكية</span>
-                                <span>الفصل الرابع</span>
-                                <span>15 MB</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="file-body">
-                        <p class="file-description">محاضرة عن الإجهاد والانفعال في المواد الهندسية، مع أمثلة تطبيقية وحلول مسائل.</p>
-                        
-                        <div class="file-details">
-                            <div class="file-detail">
-                                <span class="detail-label">المحاضر</span>
-                                <span>د. أحمد خالد</span>
-                            </div>
-                            <div class="file-detail">
-                                <span class="detail-label">تاريخ النشر</span>
-                                <span>12 أكتوبر 2023</span>
-                            </div>
-                            <div class="file-detail">
-                                <span class="detail-label">التحميلات</span>
-                                <span>245</span>
-                            </div>
-                        </div>
-                        
-                        <div class="file-actions">
-                            <button class="btn btn-download" data-file="ميكانيكا المواد - المحاضرة 5">
-                                <i class="fas fa-download"></i> تحميل
-                            </button>
-                            <button class="btn btn-preview" data-preview="ميكانيكا المواد - المحاضرة 5">
-                                <i class="fas fa-eye"></i> معاينة
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- File 2 -->
-                <div class="file-card" data-category="civil">
-                    <div class="file-header">
-                        <div class="file-icon pdf">
-                            <i class="fas fa-file-pdf"></i>
-                        </div>
-                        <div class="file-info">
-                            <h3 class="file-title">تحليل المنشآت - أسس التصميم</h3>
-                            <div class="file-meta">
-                                <span>الهندسة المدنية</span>
-                                <span>الفصل الخامس</span>
-                                <span>22 MB</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="file-body">
-                        <p class="file-description">ملف شامل عن أساسيات تحليل المنشآت الإنشائية وتصميم العناصر الحاملة.</p>
-                        
-                        <div class="file-details">
-                            <div class="file-detail">
-                                <span class="detail-label">المحاضر</span>
-                                <span>د. محمد سعيد</span>
-                            </div>
-                            <div class="file-detail">
-                                <span class="detail-label">تاريخ النشر</span>
-                                <span>5 نوفمبر 2023</span>
-                            </div>
-                            <div class="file-detail">
-                                <span class="detail-label">التحميلات</span>
-                                <span>189</span>
-                            </div>
-                        </div>
-                        
-                        <div class="file-actions">
-                            <button class="btn btn-download" data-file="تحليل المنشآت - أسس التصميم">
-                                <i class="fas fa-download"></i> تحميل
-                            </button>
-                            <button class="btn btn-preview" data-preview="تحليل المنشآت - أسس التصميم">
-                                <i class="fas fa-eye"></i> معاينة
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- File 3 -->
-                <div class="file-card" data-category="electrical">
-                    <div class="file-header">
-                        <div class="file-icon ppt">
-                            <i class="fas fa-file-powerpoint"></i>
-                        </div>
-                        <div class="file-info">
-                            <h3 class="file-title">دوائر كهربائية - مراجعة نهائية</h3>
-                            <div class="file-meta">
-                                <span>الهندسة الكهربائية</span>
-                                <span>الفصل الثالث</span>
-                                <span>18 MB</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="file-body">
-                        <p class="file-description">عرض تقديمي شامل لمراجعة مادة الدوائر الكهربائية قبل الامتحان النهائي.</p>
-                        
-                        <div class="file-details">
-                            <div class="file-detail">
-                                <span class="detail-label">المحاضر</span>
-                                <span>د. علي حسن</span>
-                            </div>
-                            <div class="file-detail">
-                                <span class="detail-label">تاريخ النشر</span>
-                                <span>20 نوفمبر 2023</span>
-                            </div>
-                            <div class="file-detail">
-                                <span class="detail-label">التحميلات</span>
-                                <span>312</span>
-                            </div>
-                        </div>
-                        
-                        <div class="file-actions">
-                            <button class="btn btn-download" data-file="دوائر كهربائية - مراجعة نهائية">
-                                <i class="fas fa-download"></i> تحميل
-                            </button>
-                            <button class="btn btn-preview" data-preview="دوائر كهربائية - مراجعة نهائية">
-                                <i class="fas fa-eye"></i> معاينة
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- File 4 -->
-                <div class="file-card" data-category="computer">
-                    <div class="file-header">
-                        <div class="file-icon zip">
-                            <i class="fas fa-file-archive"></i>
-                        </div>
-                        <div class="file-info">
-                            <h3 class="file-title">تمارين برمجة متقدمة</h3>
-                            <div class="file-meta">
-                                <span>هندسة الحاسوب</span>
-                                <span>الفصل السادس</span>
-                                <span>45 MB</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="file-body">
-                        <p class="file-description">مجموعة شاملة من التمارين والحلول في مادة البرمجة المتقدمة بلغة Java.</p>
-                        
-                        <div class="file-details">
-                            <div class="file-detail">
-                                <span class="detail-label">المحاضر</span>
-                                <span>د. سارة عبدالله</span>
-                            </div>
-                            <div class="file-detail">
-                                <span class="detail-label">تاريخ النشر</span>
-                                <span>8 ديسمبر 2023</span>
-                            </div>
-                            <div class="file-detail">
-                                <span class="detail-label">التحميلات</span>
-                                <span>421</span>
-                            </div>
-                        </div>
-                        
-                        <div class="file-actions">
-                            <button class="btn btn-download" data-file="تمارين برمجة متقدمة">
-                                <i class="fas fa-download"></i> تحميل
-                            </button>
-                            <button class="btn btn-preview" data-preview="تمارين برمجة متقدمة">
-                                <i class="fas fa-eye"></i> معاينة
-                            </button>
-                        </div>
-                    </div>
-                </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>اسم الملف</th>
+                            <th>التخصص</th>
+                            <th>الفصل</th>
+                            <th>النوع</th>
+                            <th>الحجم</th>
+                            <th>التاريخ</th>
+                            <th>التحميلات</th>
+                            <th>الإجراءات</th>
+                        </tr>
+                    </thead>
+                    <tbody id="files-table-body">
+                        <!-- Files will be populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- Pagination -->
+            <div class="pagination">
+                <button class="pagination-btn"><i class="fas fa-chevron-right"></i></button>
+                <button class="pagination-btn active">1</button>
+                <button class="pagination-btn">2</button>
+                <button class="pagination-btn">3</button>
+                <button class="pagination-btn">4</button>
+                <button class="pagination-btn"><i class="fas fa-chevron-left"></i></button>
             </div>
         </div>
-    </section>
-
-    <!-- Footer -->
-    <footer id="contact">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>المكتبة الهندسية</h3>
-                    <p>منصة تعليمية تهدف إلى توفير المصادر الدراسية للطلاب في كلية الهندسة. نوفر محاضرات، كتب، ملخصات وأبحاث في جميع التخصصات الهندسية.</p>
-                    <div class="social-icons">
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-telegram"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
-                        <a href="#"><i class="fab fa-linkedin"></i></a>
-                    </div>
-                </div>
-                <div class="footer-column">
-                    <h3>التخصصات</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">الهندسة الميكانيكية</a></li>
-                        <li><a href="#">الهندسة المدنية</a></li>
-                        <li><a href="#">الهندسة الكهربائية</a></li>
-                        <li><a href="#">هندسة الحاسوب</a></li>
-                        <li><a href="#">الهندسة الكيميائية</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>روابط مهمة</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">الرئيسية</a></li>
-                        <li><a href="#specialties">التخصصات</a></li>
-                        <li><a href="#files">الملفات الدراسية</a></li>
-                        <li><a href="#">رفع ملف جديد</a></li>
-                        <li><a href="#">اتصل بنا</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>معلومات الاتصال</h3>
-                    <ul class="footer-links">
-                        <li><i class="fas fa-map-marker-alt"></i> كلية الهندسة، جامعة التقنية</li>
-                        <li><i class="fas fa-phone"></i> +966 11 123 4567</li>
-                        <li><i class="fas fa-envelope"></i> engineering-library@university.edu</li>
-                        <li><i class="fas fa-clock"></i> الأحد - الخميس: 8 صباحاً - 4 مساءً</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>© 2023 المكتبة الهندسية. جميع الحقوق محفوظة. | تم التطوير بواسطة فريق الهندسة</p>
-            </div>
-        </div>
-    </footer>
-
+    </div>
+    
     <!-- Modal for file preview -->
     <div class="modal" id="previewModal">
         <div class="modal-content">
@@ -1273,191 +1109,473 @@
                     <p style="margin-top: 15px;">هذه معاينة للملف. للاطلاع على المحتوى الكامل، يرجى تحميل الملف.</p>
                 </div>
                 <p><strong>تفاصيل الملف:</strong></p>
-                <ul style="padding-right: 20px; margin-top: 10px;">
+                <ul style="padding-right: 20px; margin-top: 10px;" id="modalFileDetails">
+                    <li>التخصص: الهندسة الميكانيكية</li>
+                    <li>الفصل: الرابع</li>
                     <li>الحجم: 15 ميجابايت</li>
                     <li>الصيغة: PDF</li>
-                    <li>عدد الصفحات: 42 صفحة</li>
-                    <li>آخر تحديث: 12 أكتوبر 2023</li>
+                    <li>المحاضر: د. أحمد خالد</li>
+                    <li>تاريخ الرفع: 12 أكتوبر 2023</li>
+                    <li>عدد التحميلات: 245</li>
                 </ul>
             </div>
             <div class="modal-actions">
-                <button class="btn btn-preview" id="closeModalBtn">إغلاق</button>
-                <button class="btn btn-download" id="downloadFromModal">
-                    <i class="fas fa-download"></i> تحميل الملف
+                <button class="btn btn-secondary" id="closeModalBtn">إغلاق</button>
+                <button class="btn btn-primary">
+                    <i class="fas fa-edit"></i> تعديل الملف
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal for delete confirmation -->
+    <div class="modal" id="deleteModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">تأكيد الحذف</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div style="text-align: center; margin: 20px 0;">
+                    <i class="fas fa-exclamation-triangle" style="font-size: 4rem; color: #ef4444;"></i>
+                    <h3 style="margin: 15px 0;">هل أنت متأكد من حذف هذا الملف؟</h3>
+                    <p>لا يمكنك التراجع عن هذا الإجراء. سيتم حذف الملف نهائياً من النظام.</p>
+                    <p id="deleteFileName" style="font-weight: bold; color: var(--accent-color); margin-top: 10px;"></p>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-secondary" id="cancelDeleteBtn">إلغاء</button>
+                <button class="btn btn-danger" id="confirmDeleteBtn">
+                    <i class="fas fa-trash"></i> نعم، احذف الملف
                 </button>
             </div>
         </div>
     </div>
 
     <script>
+        // Sample files data
+        const filesData = [
+            { id: 1, name: "ميكانيكا المواد - المحاضرة 5", specialty: "الهندسة الميكانيكية", semester: "الفصل الرابع", type: "pdf", size: "15 MB", date: "12-10-2023", downloads: 245, lecturer: "د. أحمد خالد" },
+            { id: 2, name: "تحليل المنشآت - أسس التصميم", specialty: "الهندسة المدنية", semester: "الفصل الخامس", type: "pdf", size: "22 MB", date: "05-11-2023", downloads: 189, lecturer: "د. محمد سعيد" },
+            { id: 3, name: "دوائر كهربائية - مراجعة نهائية", specialty: "الهندسة الكهربائية", semester: "الفصل الثالث", type: "ppt", size: "18 MB", date: "20-11-2023", downloads: 312, lecturer: "د. علي حسن" },
+            { id: 4, name: "تمارين برمجة متقدمة", specialty: "هندسة الحاسوب", semester: "الفصل السادس", type: "zip", size: "45 MB", date: "08-12-2023", downloads: 421, lecturer: "د. سارة عبدالله" },
+            { id: 5, name: "مقدمة في الديناميكا الحرارية", specialty: "الهندسة الميكانيكية", semester: "الفصل الثالث", type: "pdf", size: "12 MB", date: "15-09-2023", downloads: 167, lecturer: "د. خالد محمد" },
+            { id: 6, name: "تصميم الخرسانة المسلحة", specialty: "الهندسة المدنية", semester: "الفصل السادس", type: "doc", size: "28 MB", date: "22-10-2023", downloads: 278, lecturer: "د. عمر أحمد" },
+            { id: 7, name: "أنظمة التحكم الآلي", specialty: "الهندسة الكهربائية", semester: "الفصل السابع", type: "pdf", size: "20 MB", date: "10-11-2023", downloads: 195, lecturer: "د. فاطمة علي" },
+            { id: 8, name: "قواعد البيانات المتقدمة", specialty: "هندسة الحاسوب", semester: "الفصل الخامس", type: "ppt", size: "16 MB", date: "30-10-2023", downloads: 334, lecturer: "د. يوسف سالم" }
+        ];
+
+        // DOM elements
+        const fileUploadArea = document.getElementById('file-upload-area');
+        const fileInput = document.getElementById('file-input');
+        const selectedFileContainer = document.getElementById('selected-file-container');
+        const selectedFileName = document.getElementById('selected-file-name');
+        const selectedFileSize = document.getElementById('selected-file-size');
+        const removeFileBtn = document.getElementById('remove-file-btn');
+        const uploadForm = document.getElementById('upload-form');
+        const filesTableBody = document.getElementById('files-table-body');
+        const previewModal = document.getElementById('previewModal');
+        const deleteModal = document.getElementById('deleteModal');
+        const closeModalBtns = document.querySelectorAll('.close-modal, #closeModalBtn');
+        const cancelDeleteBtn = document.getElementById('cancelDeleteBtn');
+        const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
+        const deleteFileName = document.getElementById('deleteFileName');
+        const refreshTableBtn = document.getElementById('refresh-table');
+        const quickUploadBtn = document.getElementById('quick-upload-btn');
+
+        // File to be deleted (global variable)
+        let fileToDeleteId = null;
+
+        // Initialize the page
         document.addEventListener('DOMContentLoaded', function() {
-            // Filter tabs functionality
-            const filterTabs = document.querySelectorAll('.filter-tab');
-            const fileCards = document.querySelectorAll('.file-card');
+            // Load files into table
+            renderFilesTable();
             
-            filterTabs.forEach(tab => {
-                tab.addEventListener('click', function() {
-                    // Remove active class from all tabs
-                    filterTabs.forEach(t => t.classList.remove('active'));
-                    
-                    // Add active class to clicked tab
-                    this.classList.add('active');
-                    
-                    const filterValue = this.getAttribute('data-filter');
-                    
-                    // Filter file cards
-                    fileCards.forEach(card => {
-                        if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
-                            card.style.display = 'block';
-                            setTimeout(() => {
-                                card.style.opacity = '1';
-                                card.style.transform = 'translateY(0)';
-                            }, 10);
-                        } else {
-                            card.style.opacity = '0';
-                            card.style.transform = 'translateY(20px)';
-                            setTimeout(() => {
-                                card.style.display = 'none';
-                            }, 300);
-                        }
-                    });
+            // Set up event listeners
+            setupEventListeners();
+        });
+
+        // Set up all event listeners
+        function setupEventListeners() {
+            // File upload area click
+            fileUploadArea.addEventListener('click', () => fileInput.click());
+            
+            // File input change
+            fileInput.addEventListener('change', handleFileSelect);
+            
+            // Remove selected file
+            removeFileBtn.addEventListener('click', removeSelectedFile);
+            
+            // Form submission
+            uploadForm.addEventListener('submit', handleFormSubmit);
+            
+            // Close modal buttons
+            closeModalBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    previewModal.style.display = 'none';
+                    deleteModal.style.display = 'none';
                 });
-            });
-            
-            // View options functionality
-            const viewButtons = document.querySelectorAll('.view-btn');
-            const filesGrid = document.querySelector('.files-grid');
-            
-            viewButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    // Remove active class from all view buttons
-                    viewButtons.forEach(btn => btn.classList.remove('active'));
-                    
-                    // Add active class to clicked button
-                    this.classList.add('active');
-                    
-                    const viewType = this.getAttribute('data-view');
-                    
-                    if (viewType === 'list') {
-                        filesGrid.style.gridTemplateColumns = '1fr';
-                    } else {
-                        filesGrid.style.gridTemplateColumns = 'repeat(auto-fill, minmax(350px, 1fr))';
-                    }
-                });
-            });
-            
-            // Download buttons functionality
-            const downloadButtons = document.querySelectorAll('.btn-download');
-            const downloadFromModal = document.getElementById('downloadFromModal');
-            
-            downloadButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const fileName = this.getAttribute('data-file');
-                    
-                    // Show download alert
-                    alert(`سيبدأ تحميل الملف: ${fileName}`);
-                    
-                    // Simulate download
-                    this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري التحميل...';
-                    this.disabled = true;
-                    
-                    setTimeout(() => {
-                        this.innerHTML = '<i class="fas fa-check"></i> تم التحميل';
-                        setTimeout(() => {
-                            this.innerHTML = '<i class="fas fa-download"></i> تحميل';
-                            this.disabled = false;
-                        }, 2000);
-                    }, 1500);
-                });
-            });
-            
-            // Preview modal functionality
-            const previewButtons = document.querySelectorAll('.btn-preview');
-            const previewModal = document.getElementById('previewModal');
-            const closeModalBtn = document.querySelector('.close-modal');
-            const closeModalBtn2 = document.getElementById('closeModalBtn');
-            const modalFileTitle = document.getElementById('modalFileTitle');
-            
-            previewButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const fileName = this.getAttribute('data-preview');
-                    modalFileTitle.textContent = fileName;
-                    previewModal.style.display = 'flex';
-                });
-            });
-            
-            // Close modal when clicking X or close button
-            closeModalBtn.addEventListener('click', function() {
-                previewModal.style.display = 'none';
-            });
-            
-            closeModalBtn2.addEventListener('click', function() {
-                previewModal.style.display = 'none';
             });
             
             // Close modal when clicking outside
-            window.addEventListener('click', function(event) {
+            window.addEventListener('click', (event) => {
                 if (event.target === previewModal) {
                     previewModal.style.display = 'none';
                 }
+                if (event.target === deleteModal) {
+                    deleteModal.style.display = 'none';
+                }
             });
             
-            // Search functionality
-            const searchInput = document.querySelector('.search-box input');
+            // Delete modal buttons
+            cancelDeleteBtn.addEventListener('click', () => deleteModal.style.display = 'none');
+            confirmDeleteBtn.addEventListener('click', confirmDeleteFile);
             
-            searchInput.addEventListener('input', function() {
-                const searchTerm = this.value.toLowerCase();
+            // Refresh table
+            refreshTableBtn.addEventListener('click', renderFilesTable);
+            
+            // Quick upload button
+            quickUploadBtn.addEventListener('click', () => {
+                // Scroll to upload form
+                document.querySelector('.upload-form-container').scrollIntoView({ behavior: 'smooth' });
                 
-                fileCards.forEach(card => {
-                    const title = card.querySelector('.file-title').textContent.toLowerCase();
-                    const description = card.querySelector('.file-description').textContent.toLowerCase();
-                    
-                    if (title.includes(searchTerm) || description.includes(searchTerm)) {
-                        card.style.display = 'block';
-                        setTimeout(() => {
-                            card.style.opacity = '1';
-                            card.style.transform = 'translateY(0)';
-                        }, 10);
-                    } else {
-                        card.style.opacity = '0';
-                        card.style.transform = 'translateY(20px)';
-                        setTimeout(() => {
-                            card.style.display = 'none';
-                        }, 300);
-                    }
+                // Focus on file name field
+                document.getElementById('file-name').focus();
+            });
+            
+            // Table search
+            document.querySelector('.table-search input').addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                filterFilesTable(searchTerm);
+            });
+        }
+
+        // Handle file selection
+        function handleFileSelect(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            // Validate file size (max 50MB)
+            const maxSize = 50 * 1024 * 1024; // 50MB in bytes
+            if (file.size > maxSize) {
+                alert('الملف كبير جداً. الحد الأقصى للحجم هو 50MB.');
+                fileInput.value = '';
+                return;
+            }
+            
+            // Validate file type
+            const validExtensions = ['.pdf', '.ppt', '.pptx', '.doc', '.docx', '.zip', '.rar'];
+            const fileExtension = '.' + file.name.split('.').pop().toLowerCase();
+            
+            if (!validExtensions.includes(fileExtension)) {
+                alert('نوع الملف غير مدعوم. يرجى اختيار ملف PDF، PPT، DOC أو ZIP.');
+                fileInput.value = '';
+                return;
+            }
+            
+            // Display selected file info
+            selectedFileName.textContent = file.name;
+            selectedFileSize.textContent = formatFileSize(file.size);
+            
+            // Show selected file container
+            selectedFileContainer.style.display = 'block';
+            
+            // Update file icon based on type
+            const fileIcon = document.querySelector('.selected-file .file-icon i');
+            if (fileExtension === '.pdf') {
+                fileIcon.className = 'fas fa-file-pdf';
+                fileIcon.style.color = '#ef4444';
+            } else if (fileExtension === '.ppt' || fileExtension === '.pptx') {
+                fileIcon.className = 'fas fa-file-powerpoint';
+                fileIcon.style.color = '#f59e0b';
+            } else if (fileExtension === '.doc' || fileExtension === '.docx') {
+                fileIcon.className = 'fas fa-file-word';
+                fileIcon.style.color = '#3b82f6';
+            } else if (fileExtension === '.zip' || fileExtension === '.rar') {
+                fileIcon.className = 'fas fa-file-archive';
+                fileIcon.style.color = '#10b981';
+            }
+        }
+
+        // Remove selected file
+        function removeSelectedFile() {
+            fileInput.value = '';
+            selectedFileContainer.style.display = 'none';
+        }
+
+        // Format file size
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+
+        // Handle form submission
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            
+            // Get form values
+            const fileName = document.getElementById('file-name').value;
+            const fileSpecialty = document.getElementById('file-specialty').value;
+            const fileCourse = document.getElementById('file-course').value;
+            const fileSemester = document.getElementById('file-semester').value;
+            const fileType = document.getElementById('file-type').value;
+            const fileLecturer = document.getElementById('file-lecturer').value;
+            const fileDescription = document.getElementById('file-description').value;
+            
+            // Validate required fields
+            if (!fileName || !fileSpecialty || !fileCourse || !fileSemester || !fileType || !fileLecturer) {
+                alert('يرجى ملء جميع الحقول المطلوبة.');
+                return;
+            }
+            
+            // Check if file is selected
+            if (!fileInput.files || fileInput.files.length === 0) {
+                alert('يرجى اختيار ملف للرفع.');
+                return;
+            }
+            
+            // In a real application, you would upload the file to a server here
+            // For demo purposes, we'll simulate a successful upload
+            
+            // Show success message
+            alert(`تم رفع الملف "${fileName}" بنجاح!`);
+            
+            // Add the new file to the table
+            const newFile = {
+                id: filesData.length + 1,
+                name: fileName,
+                specialty: getSpecialtyName(fileSpecialty),
+                semester: `الفصل ${fileSemester}`,
+                type: fileType,
+                size: formatFileSize(fileInput.files[0].size),
+                date: getCurrentDate(),
+                downloads: 0,
+                lecturer: fileLecturer
+            };
+            
+            filesData.unshift(newFile); // Add to beginning of array
+            renderFilesTable();
+            
+            // Reset form
+            uploadForm.reset();
+            removeSelectedFile();
+            
+            // Scroll to table
+            document.querySelector('.files-table-container').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Get specialty name from value
+        function getSpecialtyName(value) {
+            const specialties = {
+                mechanical: "الهندسة الميكانيكية",
+                civil: "الهندسة المدنية",
+                electrical: "الهندسة الكهربائية",
+                computer: "هندسة الحاسوب",
+                chemical: "الهندسة الكيميائية",
+                industrial: "الهندسة الصناعية"
+            };
+            
+            return specialties[value] || value;
+        }
+
+        // Get current date in DD-MM-YYYY format
+        function getCurrentDate() {
+            const now = new Date();
+            const day = String(now.getDate()).padStart(2, '0');
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const year = now.getFullYear();
+            
+            return `${day}-${month}-${year}`;
+        }
+
+        // Render files table
+        function renderFilesTable() {
+            filesTableBody.innerHTML = '';
+            
+            filesData.forEach(file => {
+                const row = document.createElement('tr');
+                
+                // Get badge class based on file type
+                let badgeClass = '';
+                switch(file.type) {
+                    case 'pdf': badgeClass = 'badge-pdf'; break;
+                    case 'ppt': badgeClass = 'badge-ppt'; break;
+                    case 'doc': badgeClass = 'badge-doc'; break;
+                    case 'zip': badgeClass = 'badge-zip'; break;
+                }
+                
+                // Get specialty badge color
+                let specialtyBadgeColor = '#8b5cf6'; // default purple
+                if (file.specialty.includes('ميكانيكية')) specialtyBadgeColor = '#ef4444';
+                else if (file.specialty.includes('مدنية')) specialtyBadgeColor = '#10b981';
+                else if (file.specialty.includes('كهربائية')) specialtyBadgeColor = '#f59e0b';
+                else if (file.specialty.includes('حاسوب')) specialtyBadgeColor = '#8b5cf6';
+                
+                row.innerHTML = `
+                    <td>${file.name}</td>
+                    <td>
+                        <span class="specialty-badge" style="background-color: ${specialtyBadgeColor}20; color: ${specialtyBadgeColor}">
+                            ${file.specialty}
+                        </span>
+                    </td>
+                    <td>${file.semester}</td>
+                    <td><span class="file-type-badge ${badgeClass}">${file.type.toUpperCase()}</span></td>
+                    <td>${file.size}</td>
+                    <td>${file.date}</td>
+                    <td>${file.downloads}</td>
+                    <td>
+                        <div class="action-buttons">
+                            <button class="action-btn preview-btn" data-id="${file.id}" title="معاينة">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button class="action-btn edit-btn" data-id="${file.id}" title="تعديل">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="action-btn delete-btn" data-id="${file.id}" title="حذف">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </td>
+                `;
+                
+                filesTableBody.appendChild(row);
+            });
+            
+            // Add event listeners to action buttons
+            addActionButtonListeners();
+        }
+
+        // Add event listeners to action buttons
+        function addActionButtonListeners() {
+            // Preview buttons
+            document.querySelectorAll('.preview-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const fileId = parseInt(this.getAttribute('data-id'));
+                    showFilePreview(fileId);
                 });
             });
             
-            // Specialty card click functionality
-            const specialtyCards = document.querySelectorAll('.specialty-card');
-            
-            specialtyCards.forEach(card => {
-                card.addEventListener('click', function() {
-                    const specialty = this.classList[1]; // mechanical, civil, etc.
-                    
-                    // Simulate filtering by specialty
-                    filterTabs.forEach(tab => tab.classList.remove('active'));
-                    
-                    // Activate the corresponding tab
-                    const correspondingTab = document.querySelector(`.filter-tab[data-filter="${specialty}"]`);
-                    if (correspondingTab) {
-                        correspondingTab.classList.add('active');
-                        
-                        // Trigger click event on the tab
-                        correspondingTab.click();
-                        
-                        // Scroll to files section
-                        document.getElementById('files').scrollIntoView({ behavior: 'smooth' });
-                    }
+            // Edit buttons
+            document.querySelectorAll('.edit-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const fileId = parseInt(this.getAttribute('data-id'));
+                    editFile(fileId);
                 });
             });
             
-            // Download from modal
-            downloadFromModal.addEventListener('click', function() {
-                const fileName = modalFileTitle.textContent;
-                alert(`سيبدأ تحميل الملف: ${fileName}`);
-                previewModal.style.display = 'none';
+            // Delete buttons
+            document.querySelectorAll('.delete-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const fileId = parseInt(this.getAttribute('data-id'));
+                    showDeleteConfirmation(fileId);
+                });
             });
+        }
+
+        // Show file preview modal
+        function showFilePreview(fileId) {
+            const file = filesData.find(f => f.id === fileId);
+            if (!file) return;
+            
+            document.getElementById('modalFileTitle').textContent = file.name;
+            
+            const detailsList = document.getElementById('modalFileDetails');
+            detailsList.innerHTML = `
+                <li>التخصص: ${file.specialty}</li>
+                <li>الفصل: ${file.semester}</li>
+                <li>الحجم: ${file.size}</li>
+                <li>الصيغة: ${file.type.toUpperCase()}</li>
+                <li>المحاضر: ${file.lecturer}</li>
+                <li>تاريخ الرفع: ${file.date}</li>
+                <li>عدد التحميلات: ${file.downloads}</li>
+            `;
+            
+            previewModal.style.display = 'flex';
+        }
+
+        // Edit file
+        function editFile(fileId) {
+            const file = filesData.find(f => f.id === fileId);
+            if (!file) return;
+            
+            // In a real application, you would open an edit form with pre-filled values
+            // For demo, we'll show an alert and pre-fill the upload form
+            alert(`سيتم فتح نموذج تعديل الملف: ${file.name}`);
+            
+            // Pre-fill the form with file data
+            document.getElementById('file-name').value = file.name;
+            
+            // Scroll to form
+            document.querySelector('.upload-form-container').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Show delete confirmation modal
+        function showDeleteConfirmation(fileId) {
+            const file = filesData.find(f => f.id === fileId);
+            if (!file) return;
+            
+            fileToDeleteId = fileId;
+            deleteFileName.textContent = file.name;
+            deleteModal.style.display = 'flex';
+        }
+
+        // Confirm file deletion
+        function confirmDeleteFile() {
+            if (fileToDeleteId === null) return;
+            
+            // Remove file from data array
+            const index = filesData.findIndex(f => f.id === fileToDeleteId);
+            if (index !== -1) {
+                const deletedFile = filesData.splice(index, 1)[0];
+                
+                // Show success message
+                alert(`تم حذف الملف "${deletedFile.name}" بنجاح.`);
+                
+                // Re-render table
+                renderFilesTable();
+            }
+            
+            // Close modal and reset
+            deleteModal.style.display = 'none';
+            fileToDeleteId = null;
+        }
+
+        // Filter files table based on search term
+        function filterFilesTable(searchTerm) {
+            const rows = document.querySelectorAll('#files-table-body tr');
+            
+            rows.forEach(row => {
+                const text = row.textContent.toLowerCase();
+                row.style.display = text.includes(searchTerm) ? '' : 'none';
+            });
+        }
+
+        // Drag and drop functionality for file upload
+        fileUploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            fileUploadArea.style.borderColor = '#3b82f6';
+            fileUploadArea.style.backgroundColor = 'rgba(59, 130, 246, 0.05)';
+        });
+
+        fileUploadArea.addEventListener('dragleave', () => {
+            fileUploadArea.style.borderColor = 'var(--border-color)';
+            fileUploadArea.style.backgroundColor = '';
+        });
+
+        fileUploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            fileUploadArea.style.borderColor = 'var(--border-color)';
+            fileUploadArea.style.backgroundColor = '';
+            
+            if (e.dataTransfer.files.length) {
+                fileInput.files = e.dataTransfer.files;
+                handleFileSelect({ target: fileInput });
+            }
         });
     </script>
 </body>
