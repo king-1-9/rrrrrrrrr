@@ -3,65 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>لوحة التحكم - المكتبة الهندسية</title>
+    <title>هواتف سامسونج - متجر إلكتروني</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap">
     <style>
         :root {
-            --primary-color: #3498db;
-            --primary-dark: #2980b9;
-            --secondary-color: #2ecc71;
-            --dark-bg: #0f172a;
-            --card-bg: #1e293b;
-            --text-color: #f1f5f9;
-            --text-secondary: #94a3b8;
-            --border-color: #334155;
-            --accent-color: #3b82f6;
-            --danger-color: #ef4444;
-            --warning-color: #f59e0b;
-            --success-color: #10b981;
-            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
-            --sidebar-width: 260px;
+            --primary-color: #6a11cb;
+            --secondary-color: #2575fc;
+            --dark-bg: #0f0f23;
+            --card-bg: #1a1a2e;
+            --text-color: #f1f1f1;
+            --text-secondary: #b0b0b0;
+            --accent-color: #00d2ff;
+            --border-color: #2d2d4d;
+            --success-color: #00c851;
+            --shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Tajawal', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
             background-color: var(--dark-bg);
             color: var(--text-color);
             line-height: 1.6;
-            display: flex;
-            min-height: 100vh;
+            padding-top: 80px;
         }
 
-        /* Sidebar Styles */
-        .sidebar {
-            width: var(--sidebar-width);
-            background-color: #0a0f1f;
-            padding: 20px 0;
-            display: flex;
-            flex-direction: column;
-            border-left: 1px solid var(--border-color);
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: rgba(15, 15, 35, 0.95);
             position: fixed;
-            height: 100vh;
-            right: 0;
             top: 0;
-            z-index: 100;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 15px 0;
+            box-shadow: var(--shadow);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .logo {
-            padding: 0 20px 30px;
-            border-bottom: 1px solid var(--border-color);
-            margin-bottom: 20px;
-        }
-
-        .logo h1 {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
+            font-weight: 800;
             background: linear-gradient(to right, var(--primary-color), var(--accent-color));
             -webkit-background-clip: text;
             background-clip: text;
@@ -70,1512 +70,884 @@
             align-items: center;
         }
 
-        .logo h1 i {
+        .logo i {
             margin-left: 10px;
-            font-size: 1.8rem;
-        }
-
-        .logo p {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            margin-top: 5px;
-        }
-
-        .admin-info {
-            display: flex;
-            align-items: center;
-            padding: 15px 20px;
-            background-color: rgba(59, 130, 246, 0.1);
-            margin: 0 15px 25px;
-            border-radius: 10px;
-            border: 1px solid rgba(59, 130, 246, 0.2);
-        }
-
-        .admin-avatar {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-left: 15px;
-            font-weight: bold;
-            font-size: 1.3rem;
-        }
-
-        .admin-details h3 {
-            font-size: 1.1rem;
-            margin-bottom: 3px;
-        }
-
-        .admin-details p {
-            font-size: 0.8rem;
-            color: var(--text-secondary);
+            font-size: 2rem;
         }
 
         .nav-links {
+            display: flex;
             list-style: none;
-            flex-grow: 1;
-            overflow-y: auto;
-            padding: 0 10px;
         }
 
         .nav-links li {
-            margin-bottom: 5px;
+            margin-right: 25px;
         }
 
         .nav-links a {
-            display: flex;
-            align-items: center;
-            padding: 12px 15px;
             color: var(--text-color);
             text-decoration: none;
-            border-radius: 8px;
-            transition: all 0.3s;
-        }
-
-        .nav-links a i {
-            margin-left: 10px;
-            font-size: 1.2rem;
-            width: 24px;
-            text-align: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+            position: relative;
         }
 
         .nav-links a:hover {
-            background-color: rgba(255, 255, 255, 0.05);
-            color: var(--primary-color);
-        }
-
-        .nav-links a.active {
-            background: linear-gradient(to right, rgba(59, 130, 246, 0.2), rgba(52, 152, 219, 0.2));
             color: var(--accent-color);
-            border-right: 3px solid var(--accent-color);
         }
 
-        .logout {
-            padding: 20px;
-            border-top: 1px solid var(--border-color);
-            margin-top: auto;
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            right: 0;
+            background-color: var(--accent-color);
+            transition: width 0.3s;
         }
 
-        .logout a {
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .header-actions {
             display: flex;
             align-items: center;
+        }
+
+        .cart-icon {
+            position: relative;
+            margin-left: 20px;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: var(--accent-color);
+            color: var(--dark-bg);
+            font-size: 0.8rem;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
             justify-content: center;
-            background-color: rgba(239, 68, 68, 0.1);
-            color: var(--danger-color);
-            padding: 12px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s;
-            border: 1px solid rgba(239, 68, 68, 0.2);
-        }
-
-        .logout a:hover {
-            background-color: var(--danger-color);
-            color: white;
-        }
-
-        .logout a i {
-            margin-left: 8px;
-        }
-
-        /* Main Content */
-        .main-content {
-            flex: 1;
-            margin-right: var(--sidebar-width);
-            padding: 30px;
-            width: calc(100% - var(--sidebar-width));
-        }
-
-        .page-header {
-            display: flex;
-            justify-content: space-between;
             align-items: center;
-            margin-bottom: 30px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid var(--border-color);
+            font-weight: bold;
         }
 
-        .page-title h2 {
-            font-size: 2rem;
-            margin-bottom: 8px;
+        /* Hero Section */
+        .hero {
+            padding: 60px 0;
+            background: linear-gradient(to bottom, rgba(26, 26, 46, 0.9), rgba(15, 15, 35, 0.9));
+            margin-bottom: 40px;
+            border-radius: 0 0 20px 20px;
         }
 
-        .page-title p {
-            color: var(--text-secondary);
-        }
-
-        .page-actions {
+        .hero-content {
             display: flex;
-            gap: 15px;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .hero-text {
+            flex: 1;
+            min-width: 300px;
+            padding-left: 40px;
+        }
+
+        .hero-image {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            transform: perspective(1000px) rotateY(-10deg);
+            transition: transform 0.5s;
+        }
+
+        .hero-image img:hover {
+            transform: perspective(1000px) rotateY(0deg);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            max-width: 500px;
         }
 
         .btn {
-            padding: 10px 20px;
-            border-radius: 8px;
+            display: inline-block;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
             font-weight: 600;
-            cursor: pointer;
+            font-size: 1.1rem;
             border: none;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .btn-primary {
-            background: linear-gradient(to right, var(--primary-color), var(--accent-color));
-            color: white;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);
-        }
-
-        .btn-secondary {
-            background-color: rgba(255, 255, 255, 0.05);
-            color: var(--text-color);
-            border: 1px solid var(--border-color);
-        }
-
-        .btn-secondary:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-        }
-
-        .btn-success {
-            background-color: var(--success-color);
-            color: white;
-        }
-
-        .btn-success:hover {
-            background-color: #0da271;
-            transform: translateY(-2px);
-        }
-
-        .btn-danger {
-            background-color: var(--danger-color);
-            color: white;
-        }
-
-        .btn-danger:hover {
-            background-color: #dc2626;
-        }
-
-        /* Stats Cards */
-        .stats-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-            gap: 20px;
-            margin-bottom: 40px;
-        }
-
-        .stat-card {
-            background-color: var(--card-bg);
-            border-radius: 12px;
-            padding: 20px;
-            display: flex;
-            align-items: center;
-            border: 1px solid var(--border-color);
-            transition: transform 0.3s;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow);
-        }
-
-        .stat-icon {
-            width: 60px;
-            height: 60px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-left: 15px;
-            font-size: 1.8rem;
-        }
-
-        .stat-icon.files {
-            background-color: rgba(59, 130, 246, 0.2);
-            color: var(--accent-color);
-        }
-
-        .stat-icon.users {
-            background-color: rgba(16, 185, 129, 0.2);
-            color: var(--success-color);
-        }
-
-        .stat-icon.downloads {
-            background-color: rgba(245, 158, 11, 0.2);
-            color: var(--warning-color);
-        }
-
-        .stat-icon.storage {
-            background-color: rgba(139, 92, 246, 0.2);
-            color: #8b5cf6;
-        }
-
-        .stat-info h3 {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 5px;
-        }
-
-        .stat-info p {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-
-        /* Upload Form */
-        .upload-form-container {
-            background-color: var(--card-bg);
-            border-radius: 15px;
-            padding: 30px;
-            margin-bottom: 40px;
-            border: 1px solid var(--border-color);
-            box-shadow: var(--shadow);
-        }
-
-        .upload-form-container h3 {
-            font-size: 1.5rem;
-            margin-bottom: 25px;
-            display: flex;
-            align-items: center;
-        }
-
-        .upload-form-container h3 i {
-            margin-left: 10px;
-            color: var(--accent-color);
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: var(--text-color);
-        }
-
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 12px 15px;
-            background-color: rgba(15, 23, 42, 0.5);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            color: var(--text-color);
-            font-size: 1rem;
-            transition: border-color 0.3s;
-        }
-
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--accent-color);
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 100px;
-        }
-
-        .file-upload-area {
-            border: 2px dashed var(--border-color);
-            border-radius: 12px;
-            padding: 40px 20px;
-            text-align: center;
-            margin-bottom: 20px;
-            transition: all 0.3s;
             cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 5px 15px rgba(106, 17, 203, 0.3);
         }
 
-        .file-upload-area:hover {
-            border-color: var(--accent-color);
-            background-color: rgba(59, 130, 246, 0.05);
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(106, 17, 203, 0.4);
         }
 
-        .file-upload-area i {
-            font-size: 3rem;
-            color: var(--accent-color);
-            margin-bottom: 15px;
-        }
-
-        .file-upload-area p {
-            color: var(--text-secondary);
-            margin-bottom: 10px;
-        }
-
-        .file-upload-area .file-types {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-        }
-
-        #file-input {
-            display: none;
-        }
-
-        .selected-file {
-            background-color: rgba(16, 185, 129, 0.1);
-            border: 1px solid rgba(16, 185, 129, 0.3);
-            border-radius: 8px;
-            padding: 15px;
-            margin-top: 15px;
+        /* Filters */
+        .filters {
             display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .file-info {
-            display: flex;
-            align-items: center;
-        }
-
-        .file-icon {
-            width: 40px;
-            height: 40px;
-            background-color: rgba(239, 68, 68, 0.1);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
             justify-content: center;
-            margin-left: 15px;
-            color: var(--danger-color);
-        }
-
-        .file-details h4 {
-            font-size: 1rem;
-            margin-bottom: 3px;
-        }
-
-        .file-details p {
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-        }
-
-        .remove-file {
-            background: none;
-            border: none;
-            color: var(--danger-color);
-            font-size: 1.2rem;
-            cursor: pointer;
-        }
-
-        .form-actions {
-            display: flex;
-            justify-content: flex-end;
-            gap: 15px;
-            margin-top: 30px;
-        }
-
-        /* Files Table */
-        .files-table-container {
-            background-color: var(--card-bg);
-            border-radius: 15px;
-            padding: 30px;
-            border: 1px solid var(--border-color);
-            box-shadow: var(--shadow);
-        }
-
-        .files-table-container h3 {
-            font-size: 1.5rem;
-            margin-bottom: 25px;
-            display: flex;
-            align-items: center;
-        }
-
-        .files-table-container h3 i {
-            margin-left: 10px;
-            color: var(--accent-color);
-        }
-
-        .table-controls {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 40px;
             flex-wrap: wrap;
             gap: 15px;
         }
 
-        .table-search {
+        .filter-btn {
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            padding: 10px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            border-color: transparent;
+        }
+
+        /* Products Grid */
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
             position: relative;
         }
 
-        .table-search input {
-            padding: 10px 40px 10px 15px;
-            background-color: rgba(15, 23, 42, 0.5);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            color: var(--text-color);
-            width: 250px;
-        }
-
-        .table-search i {
+        .section-title::after {
+            content: '';
             position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-secondary);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+            bottom: -10px;
+            right: 50%;
+            transform: translateX(50%);
+            border-radius: 2px;
         }
 
-        .table-actions {
-            display: flex;
-            gap: 10px;
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
         }
 
-        .table-container {
-            overflow-x: auto;
+        .product-card {
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid var(--border-color);
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
         }
 
-        thead {
-            background-color: rgba(15, 23, 42, 0.7);
+        .product-img {
+            height: 220px;
+            overflow: hidden;
+            position: relative;
         }
 
-        th {
-            padding: 15px;
-            text-align: right;
-            font-weight: 600;
-            color: var(--text-color);
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        td {
-            padding: 15px;
-            border-bottom: 1px solid var(--border-color);
-            color: var(--text-secondary);
-        }
-
-        tbody tr {
-            transition: background-color 0.3s;
-        }
-
-        tbody tr:hover {
-            background-color: rgba(255, 255, 255, 0.03);
-        }
-
-        .file-type-badge {
-            display: inline-block;
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-
-        .badge-pdf {
-            background-color: rgba(239, 68, 68, 0.2);
-            color: var(--danger-color);
-        }
-
-        .badge-ppt {
-            background-color: rgba(245, 158, 11, 0.2);
-            color: var(--warning-color);
-        }
-
-        .badge-doc {
-            background-color: rgba(59, 130, 246, 0.2);
-            color: var(--accent-color);
-        }
-
-        .badge-zip {
-            background-color: rgba(16, 185, 129, 0.2);
-            color: var(--success-color);
-        }
-
-        .specialty-badge {
-            display: inline-block;
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            background-color: rgba(139, 92, 246, 0.2);
-            color: #8b5cf6;
-        }
-
-        .action-buttons {
-            display: flex;
-            gap: 8px;
-        }
-
-        .action-btn {
-            width: 35px;
-            height: 35px;
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            border: none;
-            transition: all 0.3s;
-            font-size: 1rem;
-        }
-
-        .edit-btn {
-            background-color: rgba(59, 130, 246, 0.1);
-            color: var(--accent-color);
-        }
-
-        .edit-btn:hover {
-            background-color: var(--accent-color);
-            color: white;
-        }
-
-        .delete-btn {
-            background-color: rgba(239, 68, 68, 0.1);
-            color: var(--danger-color);
-        }
-
-        .delete-btn:hover {
-            background-color: var(--danger-color);
-            color: white;
-        }
-
-        .preview-btn {
-            background-color: rgba(16, 185, 129, 0.1);
-            color: var(--success-color);
-        }
-
-        .preview-btn:hover {
-            background-color: var(--success-color);
-            color: white;
-        }
-
-        /* Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 2000;
-            left: 0;
-            top: 0;
+        .product-img img {
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(5px);
-            justify-content: center;
-            align-items: center;
+            object-fit: cover;
+            transition: transform 0.5s;
         }
 
-        .modal-content {
-            background-color: var(--card-bg);
-            padding: 30px;
-            border-radius: 15px;
-            width: 90%;
-            max-width: 600px;
-            max-height: 90vh;
-            overflow-y: auto;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        .product-card:hover .product-img img {
+            transform: scale(1.05);
         }
 
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .modal-title {
-            font-size: 1.5rem;
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: var(--accent-color);
+            color: var(--dark-bg);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
             font-weight: 700;
         }
 
-        .close-modal {
-            background: none;
-            border: none;
-            color: var(--text-color);
-            font-size: 1.5rem;
-            cursor: pointer;
-            transition: color 0.3s;
+        .product-info {
+            padding: 20px;
         }
 
-        .close-modal:hover {
-            color: var(--primary-color);
+        .product-title {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            font-weight: 700;
         }
 
-        .modal-body {
-            margin-bottom: 20px;
+        .product-description {
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+            height: 60px;
+            overflow: hidden;
         }
 
-        .modal-actions {
+        .product-price {
             display: flex;
-            justify-content: flex-end;
-            gap: 10px;
-        }
-
-        /* Pagination */
-        .pagination {
-            display: flex;
-            justify-content: center;
-            margin-top: 30px;
-            gap: 10px;
-        }
-
-        .pagination-btn {
-            width: 40px;
-            height: 40px;
-            border-radius: 8px;
-            display: flex;
+            justify-content: space-between;
             align-items: center;
-            justify-content: center;
-            background-color: rgba(255, 255, 255, 0.05);
-            color: var(--text-color);
-            border: 1px solid var(--border-color);
+            margin-bottom: 15px;
+        }
+
+        .price {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--accent-color);
+        }
+
+        .old-price {
+            text-decoration: line-through;
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            margin-right: 10px;
+        }
+
+        .product-rating {
+            color: #ffc107;
+            font-size: 0.9rem;
+        }
+
+        .product-actions {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .add-to-cart, .view-details {
+            flex: 1;
+            text-align: center;
+            padding: 12px;
+            border-radius: 8px;
             cursor: pointer;
+            font-weight: 600;
             transition: all 0.3s;
         }
 
-        .pagination-btn.active {
-            background-color: var(--accent-color);
+        .add-to-cart {
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
             color: white;
+            margin-left: 10px;
+            border: none;
+        }
+
+        .add-to-cart:hover {
+            background: linear-gradient(to right, var(--secondary-color), var(--primary-color));
+        }
+
+        .view-details {
+            background-color: transparent;
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+        }
+
+        .view-details:hover {
+            background-color: rgba(255, 255, 255, 0.05);
             border-color: var(--accent-color);
         }
 
-        .pagination-btn:hover:not(.active) {
-            background-color: rgba(255, 255, 255, 0.1);
+        /* Features Section */
+        .features {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin: 60px 0;
+            padding: 40px 0;
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            border: 1px solid var(--border-color);
         }
 
-        /* Responsive */
-        @media (max-width: 1200px) {
-            .sidebar {
-                width: 80px;
+        .feature {
+            text-align: center;
+            padding: 20px;
+            min-width: 250px;
+        }
+
+        .feature i {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--accent-color);
+        }
+
+        .feature h3 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+
+        .feature p {
+            color: var(--text-secondary);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #0a0a1a;
+            padding: 60px 0 30px;
+            margin-top: 60px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+            bottom: 0;
+            right: 0;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-color);
+            padding-right: 5px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: var(--card-bg);
+            border-radius: 50%;
+            color: var(--text-color);
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+
+        .social-icons a:hover {
+            background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero-content {
+                flex-direction: column;
+                text-align: center;
             }
             
-            .logo h1 span, 
-            .admin-details,
-            .nav-links a span,
-            .logout a span {
-                display: none;
+            .hero-text {
+                padding-left: 0;
+                margin-bottom: 40px;
             }
             
-            .logo h1 {
-                justify-content: center;
-            }
-            
-            .admin-info {
-                justify-content: center;
-                padding: 10px;
-            }
-            
-            .nav-links a {
-                justify-content: center;
-                padding: 15px 0;
-            }
-            
-            .nav-links a i {
-                margin-left: 0;
-            }
-            
-            .main-content {
-                margin-right: 80px;
+            .hero h1 {
+                font-size: 2.8rem;
             }
         }
 
         @media (max-width: 768px) {
-            .main-content {
-                padding: 20px 15px;
+            .nav-links {
+                display: none;
             }
             
-            .page-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 15px;
+            .hero h1 {
+                font-size: 2.3rem;
             }
             
-            .page-actions {
-                width: 100%;
-                justify-content: flex-start;
+            .section-title {
+                font-size: 2rem;
             }
             
-            .form-row {
-                grid-template-columns: 1fr;
-            }
-            
-            .table-controls {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            
-            .table-search input {
-                width: 100%;
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             }
         }
 
-        @media (max-width: 576px) {
-            .sidebar {
-                width: 70px;
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.8rem;
             }
             
-            .main-content {
-                margin-right: 70px;
-            }
-            
-            .stats-cards {
-                grid-template-columns: 1fr;
-            }
-            
-            .form-actions {
+            .product-actions {
                 flex-direction: column;
+                gap: 10px;
             }
             
-            .action-buttons {
-                flex-wrap: wrap;
+            .add-to-cart {
+                margin-left: 0;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Sidebar -->
-    <div class="sidebar">
-        <div class="logo">
-            <h1><i class="fas fa-graduation-cap"></i> <span>المكتبة الهندسية</span></h1>
-            <p>لوحة التحكم الإدارية</p>
-        </div>
-        
-        <div class="admin-info">
-            <div class="admin-avatar">م</div>
-            <div class="admin-details">
-                <h3>محمد أحمد</h3>
-                <p>مدير النظام</p>
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fas fa-mobile-alt"></i>
+                <span>سامسونج ستور</span>
+            </div>
+            
+            <ul class="nav-links">
+                <li><a href="#home">الرئيسية</a></li>
+                <li><a href="#products">الهواتف</a></li>
+                <li><a href="#brands">الفئات</a></li>
+                <li><a href="#about">من نحن</a></li>
+                <li><a href="#contact">اتصل بنا</a></li>
+            </ul>
+            
+            <div class="header-actions">
+                <div class="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">3</span>
+                </div>
             </div>
         </div>
-        
-        <ul class="nav-links">
-            <li><a href="#" class="active"><i class="fas fa-tachometer-alt"></i> <span>لوحة التحكم</span></a></li>
-            <li><a href="#"><i class="fas fa-cloud-upload-alt"></i> <span>رفع الملفات</span></a></li>
-            <li><a href="#"><i class="fas fa-file-alt"></i> <span>إدارة الملفات</span></a></li>
-            <li><a href="#"><i class="fas fa-users"></i> <span>المستخدمين</span></a></li>
-            <li><a href="#"><i class="fas fa-chart-bar"></i> <span>الإحصائيات</span></a></li>
-            <li><a href="#"><i class="fas fa-cog"></i> <span>الإعدادات</span></a></li>
-        </ul>
-        
-        <div class="logout">
-            <a href="#"><i class="fas fa-sign-out-alt"></i> <span>تسجيل الخروج</span></a>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container hero-content">
+            <div class="hero-text">
+                <h1>هواتف سامسونج<br>بتقنيات المستقبل</h1>
+                <p>اكتشف أحدث تشكيلة من هواتف سامسونج الذكية عالية الجودة. هواتف مصممة لتحقق أقصى أداء وتجربة استخدام فريدة.</p>
+                <a href="#products" class="btn">تسوق الآن</a>
+            </div>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" alt="هواتف سامسونج">
+            </div>
         </div>
-    </div>
-    
+    </section>
+
     <!-- Main Content -->
-    <div class="main-content">
-        <!-- Page Header -->
-        <div class="page-header">
-            <div class="page-title">
-                <h2>لوحة التحكم الإدارية</h2>
-                <p>إدارة ورفع الملفات الدراسية لكلية الهندسة</p>
-            </div>
-            
-            <div class="page-actions">
-                <button class="btn btn-secondary">
-                    <i class="fas fa-sync-alt"></i> تحديث
-                </button>
-                <button class="btn btn-primary" id="quick-upload-btn">
-                    <i class="fas fa-upload"></i> رفع سريع
-                </button>
-            </div>
+    <div class="container">
+        <!-- Filters -->
+        <div class="filters">
+            <button class="filter-btn active" data-filter="all">الكل</button>
+            <button class="filter-btn" data-filter="galaxy-s">Galaxy S</button>
+            <button class="filter-btn" data-filter="galaxy-note">Galaxy Note</button>
+            <button class="filter-btn" data-filter="galaxy-z">Galaxy Z</button>
+            <button class="filter-btn" data-filter="galaxy-a">Galaxy A</button>
         </div>
+
+        <!-- Products Section -->
+        <h2 class="section-title" id="products">تشكيلة هواتف سامسونج</h2>
         
-        <!-- Stats Cards -->
-        <div class="stats-cards">
-            <div class="stat-card">
-                <div class="stat-icon files">
-                    <i class="fas fa-file-pdf"></i>
+        <div class="products-grid">
+            <!-- Product 1 -->
+            <div class="product-card" data-category="galaxy-s">
+                <div class="product-img">
+                    <span class="product-badge">الأكثر مبيعاً</span>
+                    <img src="https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?ixlib=rb-4.0.3&auto=format&fit=crop&w=764&q=80" alt="سامسونج جالكسي S23">
                 </div>
-                <div class="stat-info">
-                    <h3>1,254</h3>
-                    <p>إجمالي الملفات</p>
-                </div>
-            </div>
-            
-            <div class="stat-card">
-                <div class="stat-icon users">
-                    <i class="fas fa-users"></i>
-                </div>
-                <div class="stat-info">
-                    <h3>2,850</h3>
-                    <p>المستخدمين المسجلين</p>
-                </div>
-            </div>
-            
-            <div class="stat-card">
-                <div class="stat-icon downloads">
-                    <i class="fas fa-download"></i>
-                </div>
-                <div class="stat-info">
-                    <h3>15,234</h3>
-                    <p>إجمالي التحميلات</p>
-                </div>
-            </div>
-            
-            <div class="stat-card">
-                <div class="stat-icon storage">
-                    <i class="fas fa-hdd"></i>
-                </div>
-                <div class="stat-info">
-                    <h3>4.2 GB</h3>
-                    <p>سعة التخزين المستخدمة</p>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Upload Form -->
-        <div class="upload-form-container">
-            <h3><i class="fas fa-cloud-upload-alt"></i> رفع ملف دراسي جديد</h3>
-            
-            <form id="upload-form">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="file-name">اسم الملف</label>
-                        <input type="text" id="file-name" placeholder="أدخل اسم الملف بالكامل" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="file-specialty">التخصص</label>
-                        <select id="file-specialty" required>
-                            <option value="">اختر التخصص</option>
-                            <option value="mechanical">الهندسة الميكانيكية</option>
-                            <option value="civil">الهندسة المدنية</option>
-                            <option value="electrical">الهندسة الكهربائية</option>
-                            <option value="computer">هندسة الحاسوب</option>
-                            <option value="chemical">الهندسة الكيميائية</option>
-                            <option value="industrial">الهندسة الصناعية</option>
-                        </select>
-                    </div>
-                </div>
-                
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="file-course">المادة الدراسية</label>
-                        <input type="text" id="file-course" placeholder="أدخل اسم المادة" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="file-semester">الفصل الدراسي</label>
-                        <select id="file-semester" required>
-                            <option value="">اختر الفصل</option>
-                            <option value="1">الفصل الأول</option>
-                            <option value="2">الفصل الثاني</option>
-                            <option value="3">الفصل الثالث</option>
-                            <option value="4">الفصل الرابع</option>
-                            <option value="5">الفصل الخامس</option>
-                            <option value="6">الفصل السادس</option>
-                            <option value="7">الفصل السابع</option>
-                            <option value="8">الفصل الثامن</option>
-                        </select>
-                    </div>
-                </div>
-                
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="file-type">نوع الملف</label>
-                        <select id="file-type" required>
-                            <option value="pdf">PDF</option>
-                            <option value="ppt">عرض تقديمي (PPT)</option>
-                            <option value="doc">وثيقة (DOC)</option>
-                            <option value="zip">أرشيف (ZIP)</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="file-lecturer">المحاضر</label>
-                        <input type="text" id="file-lecturer" placeholder="اسم المحاضر" required>
-                    </div>
-                </div>
-                
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="file-description">وصف الملف</label>
-                        <textarea id="file-description" placeholder="أدخل وصفاً مفصلاً للملف" rows="3"></textarea>
-                    </div>
-                </div>
-                
-                <!-- File Upload Area -->
-                <div class="file-upload-area" id="file-upload-area">
-                    <i class="fas fa-cloud-upload-alt"></i>
-                    <p>اسحب وأفلت الملف هنا أو انقر للاختيار</p>
-                    <p class="file-types">يدعم الملفات: PDF, PPT, DOC, ZIP (الحد الأقصى 50MB)</p>
-                    <input type="file" id="file-input" accept=".pdf,.ppt,.pptx,.doc,.docx,.zip,.rar">
-                </div>
-                
-                <!-- Selected File Display -->
-                <div id="selected-file-container" style="display: none;">
-                    <div class="selected-file">
-                        <div class="file-info">
-                            <div class="file-icon">
-                                <i class="fas fa-file-pdf"></i>
-                            </div>
-                            <div class="file-details">
-                                <h4 id="selected-file-name">اسم الملف</h4>
-                                <p id="selected-file-size">0 KB</p>
-                            </div>
+                <div class="product-info">
+                    <h3 class="product-title">Samsung Galaxy S23 Ultra</h3>
+                    <p class="product-description">هاتف ذكي فائق مع شاشة ديناميكية AMOLED بدقة 4K، كاميرا 200 ميجابكسل، ومعالج Snapdragon 8 Gen 2.</p>
+                    <div class="product-price">
+                        <div>
+                            <span class="old-price">4,500 ر.س</span>
+                            <span class="price">3,999 ر.س</span>
                         </div>
-                        <button type="button" class="remove-file" id="remove-file-btn">
-                            <i class="fas fa-times"></i>
-                        </button>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                    <div class="product-actions">
+                        <button class="add-to-cart" data-id="1">أضف إلى السلة</button>
+                        <button class="view-details" data-id="1">تفاصيل</button>
                     </div>
                 </div>
-                
-                <div class="form-actions">
-                    <button type="reset" class="btn btn-secondary">إلغاء</button>
-                    <button type="submit" class="btn btn-success">
-                        <i class="fas fa-check"></i> رفع الملف
-                    </button>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="product-card" data-category="galaxy-z">
+                <div class="product-img">
+                    <span class="product-badge">جديد</span>
+                    <img src="https://images.unsplash.com/photo-1663499482523-1c0c1eae63ed?ixlib=rb-4.0.3&auto=format&fit=crop&w=687&q=80" alt="سامسونج جالكسي Z فولد">
                 </div>
-            </form>
+                <div class="product-info">
+                    <h3 class="product-title">Samsung Galaxy Z Fold 5</h3>
+                    <p class="product-description">هاتف ذكي قابل للطي بشاشة رئيسية 7.6 بوصة، مقاوم للماء والغبار، وتصميم مبتكر.</p>
+                    <div class="product-price">
+                        <div>
+                            <span class="old-price">7,200 ر.س</span>
+                            <span class="price">6,699 ر.س</span>
+                        </div>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                    </div>
+                    <div class="product-actions">
+                        <button class="add-to-cart" data-id="2">أضف إلى السلة</button>
+                        <button class="view-details" data-id="2">تفاصيل</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 3 -->
+            <div class="product-card" data-category="galaxy-a">
+                <div class="product-img">
+                    <img src="https://images.unsplash.com/photo-1598327105666-5b89351aff97?ixlib=rb-4.0.3&auto=format&fit=crop&w=765&q=80" alt="سامسونج جالكسي A54">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Samsung Galaxy A54 5G</h3>
+                    <p class="product-description">هاتف ذكي متوسط الفئة بشاشة Super AMOLED 120Hz، كاميرا رباعية، وبطارية 5000 مللي أمبير.</p>
+                    <div class="product-price">
+                        <div>
+                            <span class="price">1,650 ر.س</span>
+                        </div>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <div class="product-actions">
+                        <button class="add-to-cart" data-id="3">أضف إلى السلة</button>
+                        <button class="view-details" data-id="3">تفاصيل</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 4 -->
+            <div class="product-card" data-category="galaxy-s">
+                <div class="product-img">
+                    <span class="product-badge">خصم</span>
+                    <img src="https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?ixlib=rb-4.0.3&auto=format&fit=crop&w=1025&q=80" alt="سامسونج جالكسي S23">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Samsung Galaxy S23+</h3>
+                    <p class="product-description">هاتف ذكي رائد بشاشة 6.6 بوصة، كاميرا 50 ميجابكسل، وبطارية تدوم طوال اليوم.</p>
+                    <div class="product-price">
+                        <div>
+                            <span class="old-price">3,800 ر.س</span>
+                            <span class="price">3,299 ر.س</span>
+                        </div>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                    <div class="product-actions">
+                        <button class="add-to-cart" data-id="4">أضف إلى السلة</button>
+                        <button class="view-details" data-id="4">تفاصيل</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 5 -->
+            <div class="product-card" data-category="galaxy-note">
+                <div class="product-img">
+                    <img src="https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?ixlib=rb-4.0.3&auto=format&fit=crop&w=715&q=80" alt="سامسونج جالكسي نوت">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Samsung Galaxy Note 20 Ultra</h3>
+                    <p class="product-description">هاتف ذكي مع قلم S-Pen، شاشة 6.9 بوصة، وكاميرا 108 ميجابكسل للمحترفين.</p>
+                    <div class="product-price">
+                        <div>
+                            <span class="old-price">3,480 ر.س</span>
+                            <span class="price">2,999 ر.س</span>
+                        </div>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                    </div>
+                    <div class="product-actions">
+                        <button class="add-to-cart" data-id="5">أضف إلى السلة</button>
+                        <button class="view-details" data-id="5">تفاصيل</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 6 -->
+            <div class="product-card" data-category="galaxy-z">
+                <div class="product-img">
+                    <span class="product-badge">توصية</span>
+                    <img src="https://images.unsplash.com/photo-1663499482523-1c0c1eae63ed?ixlib=rb-4.0.3&auto=format&fit=crop&w=687&q=80" alt="سامسونج جالكسي Z فليب">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Samsung Galaxy Z Flip 5</h3>
+                    <p class="product-description">هاتف ذكي قابل للطي بشاشة غطاء كبيرة، تصميم مضغوط، وأداء قوي.</p>
+                    <div class="product-price">
+                        <div>
+                            <span class="old-price">4,800 ر.س</span>
+                            <span class="price">4,299 ر.س</span>
+                        </div>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                    </div>
+                    <div class="product-actions">
+                        <button class="add-to-cart" data-id="6">أضف إلى السلة</button>
+                        <button class="view-details" data-id="6">تفاصيل</button>
+                    </div>
+                </div>
+            </div>
         </div>
-        
-        <!-- Files Management Table -->
-        <div class="files-table-container">
-            <h3><i class="fas fa-file-alt"></i> إدارة الملفات الحالية</h3>
-            
-            <div class="table-controls">
-                <div class="table-search">
-                    <input type="text" placeholder="ابحث عن ملف...">
-                    <i class="fas fa-search"></i>
-                </div>
-                
-                <div class="table-actions">
-                    <button class="btn btn-secondary">
-                        <i class="fas fa-filter"></i> تصفية
-                    </button>
-                    <button class="btn btn-secondary" id="refresh-table">
-                        <i class="fas fa-sync-alt"></i>
-                    </button>
-                </div>
+
+        <!-- Features Section -->
+        <div class="features">
+            <div class="feature">
+                <i class="fas fa-shipping-fast"></i>
+                <h3>شحن مجاني</h3>
+                <p>شحن مجاني لجميع الطلبات فوق 500 ر.س</p>
             </div>
-            
-            <div class="table-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>اسم الملف</th>
-                            <th>التخصص</th>
-                            <th>الفصل</th>
-                            <th>النوع</th>
-                            <th>الحجم</th>
-                            <th>التاريخ</th>
-                            <th>التحميلات</th>
-                            <th>الإجراءات</th>
-                        </tr>
-                    </thead>
-                    <tbody id="files-table-body">
-                        <!-- Files will be populated by JavaScript -->
-                    </tbody>
-                </table>
+            <div class="feature">
+                <i class="fas fa-undo-alt"></i>
+                <h3>إرجاع مجاني</h3>
+                <p>إرجاع المنتجات مجاناً خلال 14 يوم</p>
             </div>
-            
-            <!-- Pagination -->
-            <div class="pagination">
-                <button class="pagination-btn"><i class="fas fa-chevron-right"></i></button>
-                <button class="pagination-btn active">1</button>
-                <button class="pagination-btn">2</button>
-                <button class="pagination-btn">3</button>
-                <button class="pagination-btn">4</button>
-                <button class="pagination-btn"><i class="fas fa-chevron-left"></i></button>
+            <div class="feature">
+                <i class="fas fa-shield-alt"></i>
+                <h3>ضمان الجودة</h3>
+                <p>جميع منتجاتنا أصلية وموثوقة</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-headset"></i>
+                <h3>دعم 24/7</h3>
+                <p>خدمة عملاء متاحة على مدار الساعة</p>
             </div>
         </div>
     </div>
-    
-    <!-- Modal for file preview -->
-    <div class="modal" id="previewModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title">معاينة الملف</h3>
-                <button class="close-modal">&times;</button>
-            </div>
-            <div class="modal-body">
-                <p id="modalFileTitle">ميكانيكا المواد - المحاضرة 5</p>
-                <div style="background-color: #2d3748; padding: 20px; border-radius: 10px; margin: 20px 0; text-align: center;">
-                    <i class="fas fa-file-pdf" style="font-size: 5rem; color: #ef4444;"></i>
-                    <p style="margin-top: 15px;">هذه معاينة للملف. للاطلاع على المحتوى الكامل، يرجى تحميل الملف.</p>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>سامسونج ستور</h3>
+                    <p>متجر متخصص في هواتف سامسونج الذكية عالية الجودة. نقدم أحدث الموديلات وأفضل التقنيات لتحقيق تجربة استخدام فريدة لعملائنا.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-snapchat-ghost"></i></a>
+                    </div>
                 </div>
-                <p><strong>تفاصيل الملف:</strong></p>
-                <ul style="padding-right: 20px; margin-top: 10px;" id="modalFileDetails">
-                    <li>التخصص: الهندسة الميكانيكية</li>
-                    <li>الفصل: الرابع</li>
-                    <li>الحجم: 15 ميجابايت</li>
-                    <li>الصيغة: PDF</li>
-                    <li>المحاضر: د. أحمد خالد</li>
-                    <li>تاريخ الرفع: 12 أكتوبر 2023</li>
-                    <li>عدد التحميلات: 245</li>
-                </ul>
-            </div>
-            <div class="modal-actions">
-                <button class="btn btn-secondary" id="closeModalBtn">إغلاق</button>
-                <button class="btn btn-primary">
-                    <i class="fas fa-edit"></i> تعديل الملف
-                </button>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Modal for delete confirmation -->
-    <div class="modal" id="deleteModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title">تأكيد الحذف</h3>
-                <button class="close-modal">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div style="text-align: center; margin: 20px 0;">
-                    <i class="fas fa-exclamation-triangle" style="font-size: 4rem; color: #ef4444;"></i>
-                    <h3 style="margin: 15px 0;">هل أنت متأكد من حذف هذا الملف؟</h3>
-                    <p>لا يمكنك التراجع عن هذا الإجراء. سيتم حذف الملف نهائياً من النظام.</p>
-                    <p id="deleteFileName" style="font-weight: bold; color: var(--accent-color); margin-top: 10px;"></p>
+                <div class="footer-column">
+                    <h3>روابط سريعة</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">الرئيسية</a></li>
+                        <li><a href="#products">منتجاتنا</a></li>
+                        <li><a href="#brands">الفئات</a></li>
+                        <li><a href="#about">من نحن</a></li>
+                        <li><a href="#contact">اتصل بنا</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>فئات الهواتف</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Galaxy S Series</a></li>
+                        <li><a href="#">Galaxy Note Series</a></li>
+                        <li><a href="#">Galaxy Z Series</a></li>
+                        <li><a href="#">Galaxy A Series</a></li>
+                        <li><a href="#">Galaxy M Series</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>معلومات الاتصال</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt" style="margin-left: 5px;"></i> الرياض، المملكة العربية السعودية</li>
+                        <li><i class="fas fa-phone" style="margin-left: 5px;"></i> +966 55 123 4567</li>
+                        <li><i class="fas fa-envelope" style="margin-left: 5px;"></i> info@samsung-store.com</li>
+                    </ul>
                 </div>
             </div>
-            <div class="modal-actions">
-                <button class="btn btn-secondary" id="cancelDeleteBtn">إلغاء</button>
-                <button class="btn btn-danger" id="confirmDeleteBtn">
-                    <i class="fas fa-trash"></i> نعم، احذف الملف
-                </button>
+            <div class="copyright">
+                <p>© 2023 سامسونج ستور. جميع الحقوق محفوظة.</p>
             </div>
         </div>
-    </div>
+    </footer>
 
     <script>
-        // Sample files data
-        const filesData = [
-            { id: 1, name: "ميكانيكا المواد - المحاضرة 5", specialty: "الهندسة الميكانيكية", semester: "الفصل الرابع", type: "pdf", size: "15 MB", date: "12-10-2023", downloads: 245, lecturer: "د. أحمد خالد" },
-            { id: 2, name: "تحليل المنشآت - أسس التصميم", specialty: "الهندسة المدنية", semester: "الفصل الخامس", type: "pdf", size: "22 MB", date: "05-11-2023", downloads: 189, lecturer: "د. محمد سعيد" },
-            { id: 3, name: "دوائر كهربائية - مراجعة نهائية", specialty: "الهندسة الكهربائية", semester: "الفصل الثالث", type: "ppt", size: "18 MB", date: "20-11-2023", downloads: 312, lecturer: "د. علي حسن" },
-            { id: 4, name: "تمارين برمجة متقدمة", specialty: "هندسة الحاسوب", semester: "الفصل السادس", type: "zip", size: "45 MB", date: "08-12-2023", downloads: 421, lecturer: "د. سارة عبدالله" },
-            { id: 5, name: "مقدمة في الديناميكا الحرارية", specialty: "الهندسة الميكانيكية", semester: "الفصل الثالث", type: "pdf", size: "12 MB", date: "15-09-2023", downloads: 167, lecturer: "د. خالد محمد" },
-            { id: 6, name: "تصميم الخرسانة المسلحة", specialty: "الهندسة المدنية", semester: "الفصل السادس", type: "doc", size: "28 MB", date: "22-10-2023", downloads: 278, lecturer: "د. عمر أحمد" },
-            { id: 7, name: "أنظمة التحكم الآلي", specialty: "الهندسة الكهربائية", semester: "الفصل السابع", type: "pdf", size: "20 MB", date: "10-11-2023", downloads: 195, lecturer: "د. فاطمة علي" },
-            { id: 8, name: "قواعد البيانات المتقدمة", specialty: "هندسة الحاسوب", semester: "الفصل الخامس", type: "ppt", size: "16 MB", date: "30-10-2023", downloads: 334, lecturer: "د. يوسف سالم" }
-        ];
-
-        // DOM elements
-        const fileUploadArea = document.getElementById('file-upload-area');
-        const fileInput = document.getElementById('file-input');
-        const selectedFileContainer = document.getElementById('selected-file-container');
-        const selectedFileName = document.getElementById('selected-file-name');
-        const selectedFileSize = document.getElementById('selected-file-size');
-        const removeFileBtn = document.getElementById('remove-file-btn');
-        const uploadForm = document.getElementById('upload-form');
-        const filesTableBody = document.getElementById('files-table-body');
-        const previewModal = document.getElementById('previewModal');
-        const deleteModal = document.getElementById('deleteModal');
-        const closeModalBtns = document.querySelectorAll('.close-modal, #closeModalBtn');
-        const cancelDeleteBtn = document.getElementById('cancelDeleteBtn');
-        const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
-        const deleteFileName = document.getElementById('deleteFileName');
-        const refreshTableBtn = document.getElementById('refresh-table');
-        const quickUploadBtn = document.getElementById('quick-upload-btn');
-
-        // File to be deleted (global variable)
-        let fileToDeleteId = null;
-
-        // Initialize the page
+        // تصفية المنتجات
         document.addEventListener('DOMContentLoaded', function() {
-            // Load files into table
-            renderFilesTable();
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const productCards = document.querySelectorAll('.product-card');
             
-            // Set up event listeners
-            setupEventListeners();
-        });
-
-        // Set up all event listeners
-        function setupEventListeners() {
-            // File upload area click
-            fileUploadArea.addEventListener('click', () => fileInput.click());
-            
-            // File input change
-            fileInput.addEventListener('change', handleFileSelect);
-            
-            // Remove selected file
-            removeFileBtn.addEventListener('click', removeSelectedFile);
-            
-            // Form submission
-            uploadForm.addEventListener('submit', handleFormSubmit);
-            
-            // Close modal buttons
-            closeModalBtns.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    previewModal.style.display = 'none';
-                    deleteModal.style.display = 'none';
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // إزالة الفئة النشطة من جميع الأزرار
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // إضافة الفئة النشطة للزر المحدد
+                    this.classList.add('active');
+                    
+                    const filterValue = this.getAttribute('data-filter');
+                    
+                    // تصفية المنتجات
+                    productCards.forEach(card => {
+                        if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
+                            card.style.display = 'block';
+                            setTimeout(() => {
+                                card.style.opacity = '1';
+                                card.style.transform = 'translateY(0)';
+                            }, 10);
+                        } else {
+                            card.style.opacity = '0';
+                            card.style.transform = 'translateY(20px)';
+                            setTimeout(() => {
+                                card.style.display = 'none';
+                            }, 300);
+                        }
+                    });
                 });
             });
             
-            // Close modal when clicking outside
-            window.addEventListener('click', (event) => {
-                if (event.target === previewModal) {
-                    previewModal.style.display = 'none';
+            // إضافة المنتج إلى السلة
+            const addToCartButtons = document.querySelectorAll('.add-to-cart');
+            const cartCount = document.querySelector('.cart-count');
+            let count = parseInt(cartCount.textContent);
+            
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const productId = this.getAttribute('data-id');
+                    
+                    // تأثير زر الإضافة
+                    this.innerHTML = '<i class="fas fa-check"></i> تمت الإضافة';
+                    this.style.background = 'var(--success-color)';
+                    
+                    setTimeout(() => {
+                        this.innerHTML = 'أضف إلى السلة';
+                        this.style.background = '';
+                    }, 2000);
+                    
+                    // زيادة عداد السلة
+                    count++;
+                    cartCount.textContent = count;
+                    
+                    // تأثير عداد السلة
+                    cartCount.style.transform = 'scale(1.3)';
+                    setTimeout(() => {
+                        cartCount.style.transform = 'scale(1)';
+                    }, 300);
+                    
+                    // يمكن هنا إضافة منطق لإضافة المنتج إلى السلة (localStorage أو API)
+                    console.log(`تمت إضافة المنتج ${productId} إلى السلة`);
+                });
+            });
+            
+            // عرض تفاصيل المنتج
+            const viewDetailsButtons = document.querySelectorAll('.view-details');
+            
+            viewDetailsButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const productId = this.getAttribute('data-id');
+                    alert(`سيتم عرض تفاصيل المنتج رقم ${productId}. في تطبيق حقيقي، سينتقل المستخدم إلى صفحة المنتج.`);
+                });
+            });
+            
+            // تأثيرات التمرير للنافذة
+            window.addEventListener('scroll', function() {
+                const header = document.querySelector('header');
+                if (window.scrollY > 50) {
+                    header.style.padding = '10px 0';
+                    header.style.backdropFilter = 'blur(10px)';
+                } else {
+                    header.style.padding = '15px 0';
+                    header.style.backdropFilter = 'none';
                 }
-                if (event.target === deleteModal) {
-                    deleteModal.style.display = 'none';
-                }
             });
-            
-            // Delete modal buttons
-            cancelDeleteBtn.addEventListener('click', () => deleteModal.style.display = 'none');
-            confirmDeleteBtn.addEventListener('click', confirmDeleteFile);
-            
-            // Refresh table
-            refreshTableBtn.addEventListener('click', renderFilesTable);
-            
-            // Quick upload button
-            quickUploadBtn.addEventListener('click', () => {
-                // Scroll to upload form
-                document.querySelector('.upload-form-container').scrollIntoView({ behavior: 'smooth' });
-                
-                // Focus on file name field
-                document.getElementById('file-name').focus();
-            });
-            
-            // Table search
-            document.querySelector('.table-search input').addEventListener('input', function() {
-                const searchTerm = this.value.toLowerCase();
-                filterFilesTable(searchTerm);
-            });
-        }
-
-        // Handle file selection
-        function handleFileSelect(event) {
-            const file = event.target.files[0];
-            if (!file) return;
-            
-            // Validate file size (max 50MB)
-            const maxSize = 50 * 1024 * 1024; // 50MB in bytes
-            if (file.size > maxSize) {
-                alert('الملف كبير جداً. الحد الأقصى للحجم هو 50MB.');
-                fileInput.value = '';
-                return;
-            }
-            
-            // Validate file type
-            const validExtensions = ['.pdf', '.ppt', '.pptx', '.doc', '.docx', '.zip', '.rar'];
-            const fileExtension = '.' + file.name.split('.').pop().toLowerCase();
-            
-            if (!validExtensions.includes(fileExtension)) {
-                alert('نوع الملف غير مدعوم. يرجى اختيار ملف PDF، PPT، DOC أو ZIP.');
-                fileInput.value = '';
-                return;
-            }
-            
-            // Display selected file info
-            selectedFileName.textContent = file.name;
-            selectedFileSize.textContent = formatFileSize(file.size);
-            
-            // Show selected file container
-            selectedFileContainer.style.display = 'block';
-            
-            // Update file icon based on type
-            const fileIcon = document.querySelector('.selected-file .file-icon i');
-            if (fileExtension === '.pdf') {
-                fileIcon.className = 'fas fa-file-pdf';
-                fileIcon.style.color = '#ef4444';
-            } else if (fileExtension === '.ppt' || fileExtension === '.pptx') {
-                fileIcon.className = 'fas fa-file-powerpoint';
-                fileIcon.style.color = '#f59e0b';
-            } else if (fileExtension === '.doc' || fileExtension === '.docx') {
-                fileIcon.className = 'fas fa-file-word';
-                fileIcon.style.color = '#3b82f6';
-            } else if (fileExtension === '.zip' || fileExtension === '.rar') {
-                fileIcon.className = 'fas fa-file-archive';
-                fileIcon.style.color = '#10b981';
-            }
-        }
-
-        // Remove selected file
-        function removeSelectedFile() {
-            fileInput.value = '';
-            selectedFileContainer.style.display = 'none';
-        }
-
-        // Format file size
-        function formatFileSize(bytes) {
-            if (bytes === 0) return '0 Bytes';
-            
-            const k = 1024;
-            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
-            const i = Math.floor(Math.log(bytes) / Math.log(k));
-            
-            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
-        }
-
-        // Handle form submission
-        function handleFormSubmit(event) {
-            event.preventDefault();
-            
-            // Get form values
-            const fileName = document.getElementById('file-name').value;
-            const fileSpecialty = document.getElementById('file-specialty').value;
-            const fileCourse = document.getElementById('file-course').value;
-            const fileSemester = document.getElementById('file-semester').value;
-            const fileType = document.getElementById('file-type').value;
-            const fileLecturer = document.getElementById('file-lecturer').value;
-            const fileDescription = document.getElementById('file-description').value;
-            
-            // Validate required fields
-            if (!fileName || !fileSpecialty || !fileCourse || !fileSemester || !fileType || !fileLecturer) {
-                alert('يرجى ملء جميع الحقول المطلوبة.');
-                return;
-            }
-            
-            // Check if file is selected
-            if (!fileInput.files || fileInput.files.length === 0) {
-                alert('يرجى اختيار ملف للرفع.');
-                return;
-            }
-            
-            // In a real application, you would upload the file to a server here
-            // For demo purposes, we'll simulate a successful upload
-            
-            // Show success message
-            alert(`تم رفع الملف "${fileName}" بنجاح!`);
-            
-            // Add the new file to the table
-            const newFile = {
-                id: filesData.length + 1,
-                name: fileName,
-                specialty: getSpecialtyName(fileSpecialty),
-                semester: `الفصل ${fileSemester}`,
-                type: fileType,
-                size: formatFileSize(fileInput.files[0].size),
-                date: getCurrentDate(),
-                downloads: 0,
-                lecturer: fileLecturer
-            };
-            
-            filesData.unshift(newFile); // Add to beginning of array
-            renderFilesTable();
-            
-            // Reset form
-            uploadForm.reset();
-            removeSelectedFile();
-            
-            // Scroll to table
-            document.querySelector('.files-table-container').scrollIntoView({ behavior: 'smooth' });
-        }
-
-        // Get specialty name from value
-        function getSpecialtyName(value) {
-            const specialties = {
-                mechanical: "الهندسة الميكانيكية",
-                civil: "الهندسة المدنية",
-                electrical: "الهندسة الكهربائية",
-                computer: "هندسة الحاسوب",
-                chemical: "الهندسة الكيميائية",
-                industrial: "الهندسة الصناعية"
-            };
-            
-            return specialties[value] || value;
-        }
-
-        // Get current date in DD-MM-YYYY format
-        function getCurrentDate() {
-            const now = new Date();
-            const day = String(now.getDate()).padStart(2, '0');
-            const month = String(now.getMonth() + 1).padStart(2, '0');
-            const year = now.getFullYear();
-            
-            return `${day}-${month}-${year}`;
-        }
-
-        // Render files table
-        function renderFilesTable() {
-            filesTableBody.innerHTML = '';
-            
-            filesData.forEach(file => {
-                const row = document.createElement('tr');
-                
-                // Get badge class based on file type
-                let badgeClass = '';
-                switch(file.type) {
-                    case 'pdf': badgeClass = 'badge-pdf'; break;
-                    case 'ppt': badgeClass = 'badge-ppt'; break;
-                    case 'doc': badgeClass = 'badge-doc'; break;
-                    case 'zip': badgeClass = 'badge-zip'; break;
-                }
-                
-                // Get specialty badge color
-                let specialtyBadgeColor = '#8b5cf6'; // default purple
-                if (file.specialty.includes('ميكانيكية')) specialtyBadgeColor = '#ef4444';
-                else if (file.specialty.includes('مدنية')) specialtyBadgeColor = '#10b981';
-                else if (file.specialty.includes('كهربائية')) specialtyBadgeColor = '#f59e0b';
-                else if (file.specialty.includes('حاسوب')) specialtyBadgeColor = '#8b5cf6';
-                
-                row.innerHTML = `
-                    <td>${file.name}</td>
-                    <td>
-                        <span class="specialty-badge" style="background-color: ${specialtyBadgeColor}20; color: ${specialtyBadgeColor}">
-                            ${file.specialty}
-                        </span>
-                    </td>
-                    <td>${file.semester}</td>
-                    <td><span class="file-type-badge ${badgeClass}">${file.type.toUpperCase()}</span></td>
-                    <td>${file.size}</td>
-                    <td>${file.date}</td>
-                    <td>${file.downloads}</td>
-                    <td>
-                        <div class="action-buttons">
-                            <button class="action-btn preview-btn" data-id="${file.id}" title="معاينة">
-                                <i class="fas fa-eye"></i>
-                            </button>
-                            <button class="action-btn edit-btn" data-id="${file.id}" title="تعديل">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                            <button class="action-btn delete-btn" data-id="${file.id}" title="حذف">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </div>
-                    </td>
-                `;
-                
-                filesTableBody.appendChild(row);
-            });
-            
-            // Add event listeners to action buttons
-            addActionButtonListeners();
-        }
-
-        // Add event listeners to action buttons
-        function addActionButtonListeners() {
-            // Preview buttons
-            document.querySelectorAll('.preview-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const fileId = parseInt(this.getAttribute('data-id'));
-                    showFilePreview(fileId);
-                });
-            });
-            
-            // Edit buttons
-            document.querySelectorAll('.edit-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const fileId = parseInt(this.getAttribute('data-id'));
-                    editFile(fileId);
-                });
-            });
-            
-            // Delete buttons
-            document.querySelectorAll('.delete-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const fileId = parseInt(this.getAttribute('data-id'));
-                    showDeleteConfirmation(fileId);
-                });
-            });
-        }
-
-        // Show file preview modal
-        function showFilePreview(fileId) {
-            const file = filesData.find(f => f.id === fileId);
-            if (!file) return;
-            
-            document.getElementById('modalFileTitle').textContent = file.name;
-            
-            const detailsList = document.getElementById('modalFileDetails');
-            detailsList.innerHTML = `
-                <li>التخصص: ${file.specialty}</li>
-                <li>الفصل: ${file.semester}</li>
-                <li>الحجم: ${file.size}</li>
-                <li>الصيغة: ${file.type.toUpperCase()}</li>
-                <li>المحاضر: ${file.lecturer}</li>
-                <li>تاريخ الرفع: ${file.date}</li>
-                <li>عدد التحميلات: ${file.downloads}</li>
-            `;
-            
-            previewModal.style.display = 'flex';
-        }
-
-        // Edit file
-        function editFile(fileId) {
-            const file = filesData.find(f => f.id === fileId);
-            if (!file) return;
-            
-            // In a real application, you would open an edit form with pre-filled values
-            // For demo, we'll show an alert and pre-fill the upload form
-            alert(`سيتم فتح نموذج تعديل الملف: ${file.name}`);
-            
-            // Pre-fill the form with file data
-            document.getElementById('file-name').value = file.name;
-            
-            // Scroll to form
-            document.querySelector('.upload-form-container').scrollIntoView({ behavior: 'smooth' });
-        }
-
-        // Show delete confirmation modal
-        function showDeleteConfirmation(fileId) {
-            const file = filesData.find(f => f.id === fileId);
-            if (!file) return;
-            
-            fileToDeleteId = fileId;
-            deleteFileName.textContent = file.name;
-            deleteModal.style.display = 'flex';
-        }
-
-        // Confirm file deletion
-        function confirmDeleteFile() {
-            if (fileToDeleteId === null) return;
-            
-            // Remove file from data array
-            const index = filesData.findIndex(f => f.id === fileToDeleteId);
-            if (index !== -1) {
-                const deletedFile = filesData.splice(index, 1)[0];
-                
-                // Show success message
-                alert(`تم حذف الملف "${deletedFile.name}" بنجاح.`);
-                
-                // Re-render table
-                renderFilesTable();
-            }
-            
-            // Close modal and reset
-            deleteModal.style.display = 'none';
-            fileToDeleteId = null;
-        }
-
-        // Filter files table based on search term
-        function filterFilesTable(searchTerm) {
-            const rows = document.querySelectorAll('#files-table-body tr');
-            
-            rows.forEach(row => {
-                const text = row.textContent.toLowerCase();
-                row.style.display = text.includes(searchTerm) ? '' : 'none';
-            });
-        }
-
-        // Drag and drop functionality for file upload
-        fileUploadArea.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            fileUploadArea.style.borderColor = '#3b82f6';
-            fileUploadArea.style.backgroundColor = 'rgba(59, 130, 246, 0.05)';
-        });
-
-        fileUploadArea.addEventListener('dragleave', () => {
-            fileUploadArea.style.borderColor = 'var(--border-color)';
-            fileUploadArea.style.backgroundColor = '';
-        });
-
-        fileUploadArea.addEventListener('drop', (e) => {
-            e.preventDefault();
-            fileUploadArea.style.borderColor = 'var(--border-color)';
-            fileUploadArea.style.backgroundColor = '';
-            
-            if (e.dataTransfer.files.length) {
-                fileInput.files = e.dataTransfer.files;
-                handleFileSelect({ target: fileInput });
-            }
         });
     </script>
 </body>
